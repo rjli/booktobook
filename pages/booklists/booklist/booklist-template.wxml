@@ -1,0 +1,6 @@
+<template name="booklistTemplate">
+  <view class="book-container" catchtap='onBookTap' data-booklist-id="{{id}}" data-booklist-name="{{name}}" data-book-case-id="{{item.bookcaseid}}" data-book-id="{{item.bookid}}" data-book-case-number="{{item.bookcasenumber}}">
+    <image class="book-img" src="{{img}}"></image>
+    <text class="book-name">{{name}}</text>
+  </view>
+</template>

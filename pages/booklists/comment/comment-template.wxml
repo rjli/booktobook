@@ -1,0 +1,20 @@
+<template name="commentTemplate">
+  <view class='comment-container'>
+    <view class="comment-title">
+      <image class="user-avatar" src="{{commenmemberAvatar}}"></image>
+      <view class="comment-content">
+        <view class="comment-header">
+          <text class="user-name">{{commentmemberName}}</text>
+          <star-rating rate="{{score}}" small="true">
+          </star-rating>
+        </view>
+        <text class='comment-time'>{{commentDate}}</text>
+      </view>
+    </view>
+    <view class='comment-detail'>
+      <rich-text>
+        {{content}}
+      </rich-text>
+    </view>
+  </view>
+</template>

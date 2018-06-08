@@ -1,0 +1,22 @@
+<template name="machineSimpleCoverTemplate">
+  <cover-view class="machines-container" catchtap='onMachineTap' data-machine-id="{{id}}">
+    <cover-view class="machine-content">
+      <cover-image class="machine-img" src="{{image}}"></cover-image>
+      <cover-view class="machine-detail">
+        <cover-view class="machine-detail-name">{{name}}</cover-view>
+        <cover-view>
+          <cover-view class="machine-detail-time machine-item">营业时间： {{businessHour}}</cover-view>
+        </cover-view>
+        <cover-view>
+          <cover-view class="machine-detail-location machine-item">位置信息:{{location}}</cover-view>
+        </cover-view>
+
+      </cover-view>
+    </cover-view>
+    <cover-view class="hr mt-20"></cover-view>
+    <cover-view class="unit-detail">
+      <cover-view class="highlight-font  machine-item green">可借：{{borrow}}</cover-view>
+      <cover-view class="highlight-font  machine-item blue">可还：{{return}}</cover-view>
+    </cover-view>
+  </cover-view>
+</template>

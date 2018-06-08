@@ -1,0 +1,49 @@
+<import src="../empty/empty-template.wxml" />
+<view class='container'>
+  <block wx:if="{{borrowBook}}">
+    <view class='book'>
+      <view class="book-info">
+        <text class="bookname"> {{borrowBook.bookName}}</text>
+        <text>作者 {{borrowBook.author}}</text>
+        <text>出版社 {{borrowBook.press}}</text>
+        <text>出版时间 {{borrowBook.publishTime}}</text>
+        <text>页数 {{borrowBook.pages}}</text>
+        <text>定价 {{borrowBook.price}}</text>
+        <image src="{{borrowBook.image}}"></image>
+      </view>
+    </view>
+    <view class="borrow-info">
+      <view>
+        <text>借阅时间 {{borrowBook.borrowTime}}</text>
+      </view>
+      <view>
+        <text>应还时间 {{borrowBook.shouldReturnTime}}</text>
+      </view>
+      <view>
+        <text>是否续借 {{borrowBook.isRenew}}</text>
+      </view>
+      <view>
+        <text>是否超期 {{borrowBook.isOverdue}}</text>
+      </view>
+      <view>
+        <text>超期天数 {{borrowBook.overDay}}</text>
+      </view>
+      <view>
+        <text>延期费用 {{borrowBook.delayMoney}}</text>
+      </view>
+    </view>
+    <view class="operate-btn">
+      <button class="btn-common" catchtap='onRenewTap' data-borrow-record-id="{{borrowBook.id}}"> 续借</button>
+      <button class="btn-common" catchtap='onReturnTap' data-borrow-record-id="{{borrowBook.id}}"> 归还</button>
+      <!-- <button class="btn-common"> 购买</button> -->
+    </view>
+    <!-- <text class="problem"> 书籍破损或者是续借过程有误，请点击进行问题上报</text> -->
+    <view>
+      <text>温馨提示</text>
+      <text>每次借阅只能续借一次，续借之后延长10天</text>
+    </view>
+  </block>
+  <block wx:else >
+    <template is="emptyTemplate" data="{{message}}" />
+  </block>
+</view>

@@ -1,0 +1,76 @@
+.machines-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.machine-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.machine-img {
+  border-radius: 5px;
+  width: 200rpx;
+  height: 150rpx;
+  margin-right: 40rpx;
+}
+
+.machine-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.machine-detail-name {
+  font-size: 30rpx;
+}
+
+.machines-icon {
+  font-size: 24rpx;
+  margin-right: 10rpx;
+  margin-top: -8rpx;
+  color: #666;
+}
+
+.machine-item{
+  margin-top: 20rpx;
+}
+.machine-detail-time {
+  color: #666;
+}
+
+.machine-detail-location {
+  color: #666;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
+}
+
+.highlight-font {
+  margin-right: 40rpx;
+  padding: 0 20rpx;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.green {
+  color: #393;
+}
+
+.blue {
+  color: #39c;
+}
+cover-view{
+  font-size: 24rpx;
+}
+
+.unit-detail{
+  display: flex;
+  flex-direction: row;
+}
+.unit-detail text{
+  margin-top: 10rpx;
+}

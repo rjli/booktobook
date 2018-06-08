@@ -1,0 +1,66 @@
+<import src="../../booklists/booklist/booklist-template.wxml" />
+<view class='container'>
+  <block wx:if="{{machine}}">
+    <image class="header-img" src="{{machine.image}}"></image>
+    <view class="summary">
+      <view class="original-title">
+        <text>{{machine.name}}</text>
+      </view>
+      <view class="flex-row">
+        <view class="icon">
+          <icon class="fa fa-phone" />
+        </view>
+        <text class="mark">联系电话:</text>
+        <text class="info">{{machine.telphone}}</text>
+      </view>
+      <view class="flex-row">
+        <view class="icon">
+          <icon class="fa fa-clock-o" />
+        </view>
+        <text class="mark">营业时间:</text>
+        <text class="info">{{machine.businessHour}}</text>
+      </view>
+      <view class="flex-row" catchtap='onOpenLocationTap' data-latitude="{{machine.latitude}}" data-longitude="{{machine.longitude}}">
+        <view class="icon">
+          <icon class="fa fa-location-arrow" />
+        </view>
+        <text class="mark">位置信息:</text>
+        <text class="info">{{machine.location}}</text>
+      </view>
+    </view>
+    <view class="like">
+      <icon class="fa fa-book" />
+      <!-- <text class="plain-font">(可借)</text> -->
+      <text class="highlight-font">{{machine.borrow}}</text>
+      <icon class="fa fa-hand-lizard-o" />
+      <!-- <text class="plain-font">(可还)</text> -->
+      <text class="highlight-font">{{machine.return}}</text>
+    </view>
+
+    <block wx:if="{{optiontype == 'all' || optiontype == 'bookCase'}}">
+      <view class="hr"></view>
+      <view class="case">
+        <text class="book-font"> 选择借书单元</text>
+        <view class="case-list">
+          <radio-group bindchange="radioChange">
+            <label class="case-item {{item.note?'disable':''}} {{item.checked==true?'active':''}}" wx:for="{{bookCases}}">
+              <radio value="{{item.bookcaseid}}" checked="{{item.checked}}" />
+              <text>{{item.bookcasenum}}</text>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{optiontype == 'all' || optiontype == 'bookList'}}">
+      <view class="hr"></view>
+      <view class="book">
+        <text class="book-font"> 可借书单</text>
+        <scroll-view class="book-imgs" scroll-x="true" style="width:100%">
+          <block wx:for="{{machine.bookLists}}" wx:for-item="booklist">
+              <template is="booklistTemplate" data="{{...booklist}}" />
+          </block>
+        </scroll-view>
+      </view>
+    </block>
+  </block>
+</view>

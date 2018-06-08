@@ -1,0 +1,20 @@
+<!--pages/wallet/index.wxml-->
+<view class="container">
+    <view class="overage">
+        <view>
+            <text class="overage-header">我的余额（元）</text>
+        </view>
+        <view>
+            <text class="overage-amount">{{wallet}}</text>
+        </view>
+         <view>
+            <text catchtap='onWalletDescTap' class="overage-desc">余额说明</text>
+        </view>        
+    </view>
+    <button bindtap="movetoCharge" class="btn-common">充值</button>
+    <view bindtap="showTicket" class="my-ticket tapbar">
+        <text>我的红包</text>
+        <text><text class="c-g">{{redpacket}}元</text>></text>
+    </view>
+    
+</view>

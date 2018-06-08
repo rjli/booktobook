@@ -1,0 +1,14 @@
+<view class="stars-container">
+  <view class="stars {{small? 'small':'normal'}}">
+    <block wx:for="{{starArr}}" wx:for-item="i">
+      <image wx:if="{{i == 1}}" src='/images/icon/star.png' bindtap="handleTap" data-index="{{index}}"></image>
+      <image wx:elif="{{i == 2}}" src='/images/icon/half-star.png' bindtap="handleTap" data-index="{{index}}"></image>
+      <image wx:else src='/images/icon/none-star.png' bindtap="handleTap" data-index="{{index}}"></image>
+    </block>
+  </view>
+  <block wx:if="{{showScore}}">
+    <text wx:if="{{rate}}" class="star-score">{{rate}}分</text>
+    <text wx:else class="star-score">还没有评分哦</text>
+  </block>
+
+</view>

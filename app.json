@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/problem/problem",
+    "pages/booklists/comments/comments",
+    "pages/booklists/create-comment/create-comment",
+    "pages/mine/mine",
+    "pages/mine/wallet/wallet",
+    "pages/member/member",
+    "pages/booklists/booklist-detail/booklist-detail",
+    "pages/machines/machine/machine",
+    "pages/mine/charge/charge",
+    "pages/mine/about/about",
+    "pages/borrow/borrow",
+    "pages/shalve/shalve",
+    "pages/shalve/bookcategory/bookcategory"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "书来书往",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  }
+}

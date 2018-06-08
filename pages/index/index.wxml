@@ -1,0 +1,28 @@
+<import src="../machines/machine-simple/machine-simple-template.wxml" />
+<import src="../empty/empty-template.wxml" />
+<import src="../machines/machine-simple/machine-simple-cover-template.wxml" />
+<view class="search">
+  <icon type="search" class="search-img" size="13" color="#666"></icon>
+  <input type="text" placeholder="查找附近借书机" placeholder-class="placeholder" bindfocus="onBindFocus" bindconfirm="onBindConfirm" />
+  <image wx:if="{{searchPanelShow}}" src="/images/icon/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+</view>
+<view class="container" wx:if="{{containerShow}}">
+  <map id="bookMap" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markerTap" bindcontroltap="bindcontroltap" show-location>
+    <cover-view class="show-popup" hidden="{{hideShopPopup}}">
+      <cover-view class="popup-mask" bindtap="closePopupTap"></cover-view>
+      <cover-view class="popup-contents">
+        <template is="machineSimpleCoverTemplate" data="{{...machine}}" />
+      </cover-view>
+    </cover-view>
+
+  </map>
+</view>
+
+<view class="searchPanelShow" wx-if="{{searchPanelShow}}">
+  <block wx:for="{{machines}}" wx:for-item="machine">
+    <template is="machineSimpleTemplate" data="{{...machine}}" />
+  </block>
+  <bolck wx:if="{{machines.length <= 0}}">
+    <template is="emptyTemplate" data="{{message}}" />
+  </bolck>
+</view>

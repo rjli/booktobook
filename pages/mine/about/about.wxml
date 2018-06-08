@@ -1,0 +1,40 @@
+<view class="container">
+  <swiper vertical="{{false}}" indicator-dots="true" autoplay="true" interval="5000">
+    <swiper-item>
+      <image src="/images/about/jsf1.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/about/jsf2.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/about/jsf3.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/images/about/jsf4.jpg"></image>
+    </swiper-item>
+  </swiper>
+  <view class="content">
+    <text class="header">娇书坊</text>
+    <view class="hr"></view>
+    <text class="summary">
+      我们爱书店
+      书店带给我们什么？
+      不仅是排排架上泛着墨香的书
+      和度过宁静时光的空
+      它还可以带给你诗与远方
+     </text>
+    <view class="hr"></view>
+    <view>
+      <icon class="fa fa-clock-o　machines-icon" />
+      <text class="detail">周一至周日 09:00-21:00</text>
+    </view>
+    <view>
+      <icon class="fa fa-phone　machines-icon" />
+      <text class="detail"> 0351-5221752</text>
+    </view>
+    <view>
+      <icon class="fa fa-location-arrow　machines-icon" />
+      <text class="detail" catchtap='onOpenLocationTap'>体育路与晋阳街交叉口北美金棕榈2号楼底商</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+@import "../comment/comment-template.wxss";
+.container{
+  padding: 60rpx 40rpx;
+}

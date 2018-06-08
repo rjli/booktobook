@@ -1,0 +1,71 @@
+<!--pages/mine/member/member.wxml-->
+<view class="container">
+  <image class="head-img" src="/images/member/bg.jpg"></image>
+  <view class="head-img-hover">
+    <block wx:if="{{userInfo.avatarUrl != ''}}">
+      <image class="member-avatar" src="{{userInfo.avatarUrl}}"></image>
+    </block>
+    <view class="user-info">
+      <view class="name">
+        <text class="membername">{{userInfo.nickName}}</text>
+        <block wx:if="{{userInfo.memberid}}">
+          <image class="crown" src="/images/member/crown2.png"></image>
+        </block>
+      </view>
+      <block wx:if="{{userInfo.memberid == ''}}">
+        <text class="not_member" catchtap='moveToRegisterMember'>您还为成为会员</text>
+      </block>
+      <block wx:if="{{userInfo.memberid}}">
+        <text class="time-info">会员到期日：{{userInfo.memberExpirationDate}}</text>
+      </block>
+    </view>
+  </view>
+  <view class="content">
+    <view class="content-title">
+      <text>会员专享</text>
+    </view>
+    <view class="content-detail">
+      <view>
+        <icon class="fa fa-check-square-o" />
+        <text class="detail">全年免费借书</text>
+      </view>
+      <view>
+        <icon class="fa fa-check-square-o" />
+        <text class="detail">不定时现金红包</text>
+      </view>
+      <view>
+        <icon class="fa fa-check-square-o" />
+        <text class="detail">专项购书优惠</text>
+      </view>
+      <view class="hr"></view>
+      <view class="memberfee">
+        <text class="fee-text">会员/年</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open">99元</text>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<!--mask-->
+<view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">
+    <text>购买须知</text>
+    <image src="/images/icon/xx.png" class="xx-img" bindtap="powerDrawer" data-statu="close"></image>
+  </view>
+
+  <view class='hr-10'></view>
+  <view class="drawer_content">
+    <text>●  会员有效期内，您可以无限量借阅书籍</text>
+    <text>●  每次只能借阅一本图书，归还图书后才能继续借阅</text>
+    <text>●  会员过期后，您将不在可以借阅书籍</text>
+    <text>●  会员为虚拟产品，已经付费概不退款，敬请谅解</text>
+  </view>
+  <view class='hr'></view>
+  <view class="btn_ok" bindtap="rigisterMember">购买 99元/年</view>
+</view>

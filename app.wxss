@@ -1,0 +1,82 @@
+/**app.wxss**/
+@import "utils/fontAwesome.wxss";
+
+.container {
+  height: 100vh;
+}
+
+page {
+  background-color: #f2f2f2;
+}
+
+.title {
+  background-color: #f2f2f2;
+  padding: 30rpx 0 30rpx 50rpx;
+  font-size: 28rpx;
+  color: #000;
+}
+
+.tapbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 30rpx 20rpx;
+}
+
+.btn-common {
+  background-color: #272636;
+  width: 90%;
+  margin: 30rpx auto 30rpx;
+  text-align: center;
+  color: #fff;
+}
+
+text {
+  font-family: MicroSoft YaHei;
+  font-size: 24rpx;
+  letter-spacing: 2rpx; /*属性增加或减少字符间的空白（字符间距）。 */
+}
+
+textarea {
+  font-family: MicroSoft YaHei;
+  font-size: 24rpx;
+  letter-spacing: 2rpx; /*属性增加或减少字符间的空白（字符间距）。 */
+}
+
+rich-text {
+  font-family: MicroSoft YaHei;
+  font-size: 24rpx;
+  letter-spacing: 2rpx; /*属性增加或减少字符间的空白（字符间距）。 */
+}
+
+.hr {
+  margin-top: 45rpx;
+  height: 1px;
+  width: 100%;
+  background-color: #d9d9d9;
+}
+
+.hr-10 {
+  margin-top: 10rpx;
+  height: 1px;
+  width: 100%;
+  background-color: #d9d9d9;
+}
+
+/* common   */
+
+.mr-20 {
+  margin-right: 20rpx;
+}
+
+.fontawsome-icon {
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  margin-top: -8rpx;
+  color: #333;
+}
+
+.green {
+  color: green;
+}

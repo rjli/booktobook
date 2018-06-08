@@ -1,0 +1,24 @@
+.stars-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  margin-right: 24rpx;
+  margin-top: 6rpx;
+}
+
+.small image {
+  height: 17rpx;
+  width: 17rpx;
+  padding-left: 3rpx;
+}
+
+.normal image {
+  height: 48rpx;
+  width: 48rpx;
+  padding-left: 12rpx;
+}

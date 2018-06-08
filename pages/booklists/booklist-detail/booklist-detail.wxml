@@ -1,0 +1,85 @@
+<!--pages/book/book.wxml-->
+<import src="../comment/comment-template.wxml" />
+<view class="container">
+  <block wx:if="{{book}}">
+    <view class='header'>
+      <image class="head-img" src="{{book.image}}" mode="aspectFill" />
+      <view class="head-img-hover">
+        <text class="main-title">{{book.title}}</text>
+      </view>
+      <image class="movie-img" src="{{book.image}}" data-src="{{book.image}}" catchtap="viewBookPostImg" />
+    </view>
+    <view class="summary">
+      <view class="original-title">
+        <text>{{book.title}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">作者</text>
+        <text>{{book.author}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">出版社</text>
+        <text>{{book.publisher}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">出版时间</text>
+        <text>{{book.pubdate}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">页数</text>
+        <text>{{book.pages}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">价格</text>
+        <text>{{book.price}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">装帧</text>
+        <text>{{book.binding}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">ISBN</text>
+        <text>{{book.isbn}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="mark">评分</text>
+        <star-rating rate="{{book.average}}" showScore="true" small="true">
+        </star-rating>
+      </view>
+      <view class="flex-row">
+        <button class="comment-btn" data-type="want" catchtap='goToComment'>想看</button>
+        <button class="comment-btn" data-type="seen" catchtap='goToComment'>看过</button>
+      </view>
+       <button class="btn-borrow" catchtap='onBorrowTap'>借阅</button> 
+    </view>
+
+    <view class="hr"></view>
+
+    <view class="synopsis">
+      <view>
+        <text class="synopsis-font">内容简介</text>
+      </view>
+      <text class="summary-content">{{book.summary}}</text>
+    </view>
+    <view class="hr"></view>
+    <view class="synopsis">
+      <view>
+        <text class="synopsis-font">作者简介</text>
+      </view>
+      <text class="summary-content">{{book.author_intro}}</text>
+    </view>
+    <view class="hr"></view>
+    <view class="comments">
+      <text class="synopsis-font">书单评论</text>
+      <block wx:for="{{book.comments}}" wx:for-item="comment">
+        <template is="commentTemplate" data="{{...comment}}" />
+      </block>
+
+      <view class="comments-more">
+        <text wx:if="{{book.comments.length<=0}}" catchtap='goToComment'>快来发表评论吧...</text>
+        <text wx:else catchtap='goToMoreComments'>查看更多评论...</text>
+      </view>
+
+    </view>
+  </block>
+</view>

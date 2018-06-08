@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "评论",
+  "usingComponents": {
+    "star-rating": "/components/star-rating/star-rating"
+  },
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,19 @@
+.empty-content{
+  display: flex;
+  flex-direction: column;
+  padding-top: 160rpx;
+  text-align: center;
+}
+.empty-container image {
+  width: 340rpx;
+  height: 200rpx;
+  margin: 0 auto;
+}
+.empty-container text {
+  margin-top: 60rpx;
+  color: #666;
+  font-size: 30rpx;
+}
+page {
+  background-color: white;
+}

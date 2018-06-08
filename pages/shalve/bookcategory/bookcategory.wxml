@@ -1,0 +1,18 @@
+<!--pages/shalve/bookcategory/bookcategory.wxml-->
+<view class='container'>
+  <view>
+    <view class="case-list">
+      <radio-group bindchange="radioChange">
+        <block wx:for="{{bookCategorys}}" wx:for-item="bookCategory">
+          <text>{{bookCategory.bookkindname}} </text>
+          <view class="single-view-container">
+            <label class="case-item  {{item.checked==true?'active':''}}" wx:for="{{bookCategory.son}}">
+              <radio value="{{item.bookkindId}}" checked="{{item.checked}}" />
+              <text>{{item.bookkindname}}</text>
+            </label>
+          </view>
+        </block>
+      </radio-group>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,46 @@
+@import "../empty/empty-template.wxss";
+.container {
+  padding: 0 40rpx;
+}
+
+.book {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20rpx;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookname {
+  font-size: 60rpx;
+}
+
+.book-info  text {
+  margin-bottom: 20rpx;
+}
+
+.book image {
+  height: 353rpx;
+  width: 260rpx;
+  position: absolute;
+  top: 100rpx;
+  right: 40rpx;
+}
+
+.operate-btn{
+  display: flex;
+  flex-direction: row;
+  margin-top: 40rpx;
+  padding-right: 20rpx;
+}
+.operate-btn button{
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.problem{
+  color: red;
+}
