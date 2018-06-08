@@ -1,5 +1,5 @@
 var app = getApp();
-var util = require("../../utils/util.js");
+var requestData = require("../../utils/requestData.js");
 Page({
   data: {
     booklists: [],
@@ -28,14 +28,7 @@ Page({
     this.requestBookListData(this.data.totalCount);
   },
   requestBookListData: function (start) {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getBookListsBykindId.st"
-    var data = {
-      "rkspAutoComplete": true,
-      "bookkindId": this.data.bookkindId,
-      "start": start,
-      "count": this.data.defaultCount
-    }
-    util.http(url, data, "GET", this.processBooksData);
+    requestData.getBookListByCategoryId(this.data.bookkindId, start, this.data.defaultCount, this.processBooksData);
   },
   processBooksData: function (data) {
     var booklists = data
@@ -79,19 +72,7 @@ Page({
     })
   },
   shalveData: function (booklistId) {
-    var userId = wx.getStorageSync('userInfo').userid;
-    var machineId = this.data.machineId;
-    var bookcaseId = this.data.bookcaseId;
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_shelfBook.st"
-    var data = {
-      "rkspAutoComplete": true,
-      "machineId": machineId,
-      "bookcaseId": bookcaseId,
-      "bookListId": booklistId,
-      "userId": userId
-    }
-    console.log(data);
-    util.http(url, data, "GET", this.processShalveData);
+    requestData.shalveBook(this.data.machineId, this.data.bookcaseId, booklistId, this.processShalveData);
   },
   processShalveData: function (data) {
     if (data.message.indexOf("成功") > 0) {

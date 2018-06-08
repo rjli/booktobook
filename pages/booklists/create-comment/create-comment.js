@@ -27,7 +27,6 @@ Page({
       focus: false
     });
     requestData.createComment(this.data.booklistId, "评论", this.data.rate, this.data.comment, this.processResultData);
-    var userId = wx.getStorageSync('userInfo').userid;
   },
   processResultData: function (data) {
     if (data.message.indexOf("成功")>0) {

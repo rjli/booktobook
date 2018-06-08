@@ -1,17 +1,12 @@
 var app = getApp();
 var util = require("../../../utils/util.js");
+var requestData = require("../../../utils/requestData.js");
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     book: ""
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
+    console.log(options);
     this.setData({
       machineId: options.machineId,
       bookCaseId: options.bookCaseId,
@@ -22,12 +17,7 @@ Page({
     this.requestBooklistDetail();
   },
   requestBooklistDetail: function () {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_findBookDetailById.st"
-    var data = {
-      "rkspAutoComplete": true,
-      "bookListId": this.data.bookListId,
-    }
-    util.http(url, data, "GET", this.processBookData);
+    requestData.getBookListDetailById(this.data.bookListId, this.processBookData);
   },
   onShow: function (options) {
     if (app.globalData.isBack) {
@@ -39,17 +29,7 @@ Page({
    * 请求服务器，实现结束的打开柜门的操作
    */
   onBorrowTap: function (event) {
-    var userInfo = wx.getStorageSync("userInfo");
-    console.log(this.data.book.id);
-    var data = {
-      machineId: this.data.machineId,
-      bookcaseId: this.data.bookCaseId,
-      bookListId: this.data.book.id,
-      bookId: this.data.bookId,
-      memberId: userInfo.userid
-    }
-    var url = app.globalData.zbtcBase + "/DPlatform//btb/bro/fbro0020_createTheBorrowingRecord.st?rkspAutoComplete=true";
-    util.http(url, data, "GET", this.processResult);
+    requestData.createTheBorrowingRecord(this.data.machineId, this.data.bookCaseId, this.data.book.id, this.data.bookId, this.processResult);
   },
   /**
    * 预览图片信息

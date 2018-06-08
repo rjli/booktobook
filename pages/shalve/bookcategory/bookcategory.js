@@ -1,21 +1,16 @@
 var app = getApp();
 var util = require("../../../utils/util.js");
+var requestData = require("../../../utils/requestData.js");
 Page({
   data: {
 
   },
   onLoad: function (options) {
-    var machineId = options.machineId;
-    var bookcaseId = options.bookcaseId;
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getBookKind.st"
-    var data = {
-      "rkspAutoComplete": true,
-    }
     this.setData({
-      machineId: machineId,
-      bookcaseId: bookcaseId
+      machineId: options.machineId,
+      bookcaseId: options.bookcaseId
     });
-    util.http(url, data, "GET", this.processCategoryData);
+    requestData.getBookCategoryList(this.processCategoryData);
   },
   processCategoryData: function (data) {
     this.setData({

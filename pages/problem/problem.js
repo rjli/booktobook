@@ -1,5 +1,5 @@
 var app = getApp();
-var util = require("../../utils/util.js");
+var requestData = require("../../utils/requestData.js");
 Page({
   data: {
     picUrls: [],// 故障图路径数组
@@ -30,7 +30,6 @@ Page({
   },
   onLoad: function (options) {
     let machineId = options.machineId;
-    // let machineId = "4028e4996349c2bb01634e85e53700a0";
     this.setData({
       machineId: machineId
     })
@@ -88,24 +87,11 @@ Page({
   },
   //问题上报
   onProblemTap: function (event) {
-    let url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_createTheProblem.st?rkspAutoComplete=true"
-    let data = {
-      // "rkspAutoComplete": true,
-      "userId": wx.getStorageSync('userInfo').userid,
-      "type": "故障保修",
-      "content": this.data.content,
-      "machineId": this.data.machineId,
-      "remark": this.data.remark,
-      "bookcaseId": this.data.bookcaseId
-    }
-    util.http(url, data, "POST", this.processProblemData);
+    requestData.createProblem("故障保修", this.data.machineId, this.data.bookcaseId, "", this.data.content, this.data.remark, this.processProblemData);
   },
   processProblemData: function (data) {
     let length = this.data.picUrls.length; //总共个数
     let problemId = data.id;
-    // wx.showToast({
-    //   title: data.message,
-    // })
     this.setData({
       problemId: problemId
     })
@@ -133,7 +119,6 @@ Page({
   },
   // 多文件上传函数
   uploadFiles(filePaths, successUp, failUp, i, length) {
-    console.log(filePaths);
     wx.uploadFile({
       url: app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_uploadfile.st?rkspAutoComplete=true",
       filePath: filePaths[i],

@@ -1,5 +1,6 @@
 var util = require("../../utils/util.js");
 var app = getApp();
+var requestData = require("../../utils/requestData.js");
 Page({
 
   /**
@@ -30,10 +31,8 @@ Page({
       timingFunction: "linear", //线性 
       delay: 0 //0则不延迟 
     });
-
     // 第2步：这个动画实例赋给当前的动画实例 
     this.animation = animation;
-
     // 第3步：执行第一组动画 
     animation.opacity(0).rotateX(-100).step();
 
@@ -41,7 +40,6 @@ Page({
     this.setData({
       animationData: animation.export()
     })
-
     // 第5步：设置定时器到指定时候后，执行第二组动画 
     setTimeout(function () {
       // 执行第二组动画 
@@ -59,7 +57,6 @@ Page({
         );
       }
     }.bind(this), 200)
-
     // 显示 
     if (currentStatu == "open") {
       this.setData(
@@ -69,12 +66,8 @@ Page({
       );
     }
   },
-  rigisterMember: function (data) {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerMember.st?rkspAutoComplete=true"
-    var data = {
-      "userid": this.data.userInfo.userid
-    }
-    util.http(url, data, "GET", this.processRegisterMember);
+  registerMember: function (data) {
+    requestData.registerMember(this.processRegisterMember);
   },
   processRegisterMember: function (data) {
     var userInfo = this.data.userInfo;

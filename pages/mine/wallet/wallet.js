@@ -1,5 +1,4 @@
-var app = getApp();
-var util = require("../../../utils/util.js");
+var requestData = require("../../../utils/requestData.js");
 Page({
   data: {
     overage: 0,
@@ -7,13 +6,7 @@ Page({
   },
   // 页面加载
   onLoad: function (options) {
-    var memberid = wx.getStorageSync('userInfo').memberid;
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_getMyWallet.st";
-    var data = {
-      "rkspAutoComplete": true,
-      "memberId": memberid
-    }
-    util.http(url, data, "GET", this.processWallet);
+    requestData.getAccountInfo(this.processWallet);
   },
   onWalletDescTap: function (event) {
     wx.showModal({

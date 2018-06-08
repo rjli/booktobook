@@ -8,7 +8,7 @@ Page({
     requestData.onGoingBorrowingRecord(this.processBorrowData);
   },
   processBorrowData: function (data) {
-    if (data.size > 0) {
+    if (data.length > 0) {
       this.setData({
         borrowBook: data[0]
       });
@@ -24,6 +24,7 @@ Page({
     requestData.onRewBook(borrowRecordId, this.processReNewData);
   },
   processReNewData: function (data) {
+    console.log(data);
     if (!data) {
       wx.showToast(data.message);
     }

@@ -1,16 +1,14 @@
-var app = getApp();
-var util = require("../../../utils/util.js");
+var requestData = require("../../../utils/requestData.js");
 Page({
   data: {
     total: 0
   },
-  // 页面加载
   onLoad: function (options) {
   },
   // 存储输入的充值金额
-  bindInput: (res) => {
+  bindInput: function (event) {
     this.setData({
-      total: res.detail.value
+      total: event.detail.value
     })
   },
   charge: function () {
@@ -23,25 +21,16 @@ Page({
         confirmText: "不不不不"
       })
     } else {
-      var userInfo = wx.getStorageSync('userInfo');
-      var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerAccount.st";
-      var data = {
-        "rkspAutoComplete": true,
-        "userid": userInfo.userid,
-        "memberid": userInfo.memberid,
-        "total": this.data.total
-      }
-      util.http(url, data, "GET", this.processCharge);
+      requestData.registerAccount(this.data.total, this.processCharge);
     }
   },
-  processCharge: (data) => {
-    var that = this;
+  processCharge: function (data) {
     wx.navigateBack({
       delta: 2,
       success: (res) => {
         wx.setStorage({
           key: 'wallet',
-          data: parseInt(that.data.total)
+          data: parseInt(this.data.total)
         })
         wx.showToast({
           title: "充值成功",
