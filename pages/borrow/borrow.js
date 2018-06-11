@@ -20,33 +20,23 @@ Page({
   },
   onRenewTap: function (event) {
     var borrowRecordId = event.currentTarget.dataset.borrowRecordId;
-    requestData.rewBook(borrowRecordId, this.processReNewData);
+    console.log(borrowRecordId);
+    requestData.onRewBook(borrowRecordId, this.processReNewData);
   },
   processReNewData: function (data) {
-    if (!!data) {
-      this.setData({
-        borrowBook: data
-      });
-      wx.showToast({
-        title: '续借成功'
-      });
+    console.log(data);
+    if (!data) {
+      wx.showToast(data.message);
     }
   },
   onReturnTap: function (event) {
     var borrowRecordId = this.data.borrowBook.id;
     var delayMoney = this.data.borrowBook.delayMoney;
     var overDay = this.data.borrowBook.overDay;
-    wx.scanCode({
-      scanType: "qrCode",
-      success: (res) => {
-        var id = res.result;
-        //扫描借书机二维码
-        // var id = '4028e4996349c2bb01634e85e53700a0';
-        wx.navigateTo({
-          url: '../machines/machine/machine?id=' + id + '&type=bookCase&caseType=return&borrowRecordId=' + borrowRecordId + '&delayMoney=' + delayMoney + '&overDay=' + overDay,
-        })
-      }, fail: (res) => {
-      }
+    //扫描借书机二维码
+    var id = '4028e4996349c2bb01634e85e53700a0';
+    wx.navigateTo({
+      url: '../machines/machine/machine?id=' + id + '&type=bookCase&caseType=return&borrowRecordId=' + borrowRecordId + '&delayMoney=' + delayMoney + '&overDay=' + overDay,
     })
   }
 })

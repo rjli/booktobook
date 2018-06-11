@@ -46,11 +46,11 @@
         <star-rating rate="{{book.average}}" showScore="true" small="true">
         </star-rating>
       </view>
-      <view wx:if="{{btnType == 'simple'}}" class="flex-row">
-        <button class="comment-btn" data-type="want" catchtap='goToComment'> 想看 </button>
+      <view class="flex-row">
+        <button class="comment-btn" data-type="want" catchtap='goToComment'>想看</button>
         <button class="comment-btn" data-type="seen" catchtap='goToComment'>看过</button>
       </view>
-      <button wx:elif="{{btnType == 'borrow'}}" class="btn-borrow" catchtap='onBorrowTap'>借阅</button>
+       <button class="btn-borrow" catchtap='onBorrowTap'>借阅</button> 
     </view>
 
     <view class="hr"></view>

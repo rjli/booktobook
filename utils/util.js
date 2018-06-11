@@ -40,8 +40,6 @@ function http(url, data, type, callBack, isNavBarLoading) {
       "Content-Type": contenttype
     },
     success: function (res) {
-      console.log(" result")
-      console.log(res.data);
       if (isNavBarLoading) {
         wx.hideNavigationBarLoading();
       } else {
@@ -50,6 +48,7 @@ function http(url, data, type, callBack, isNavBarLoading) {
       if ("success" == res.data.status) {
         callBack(res.data.result);
       } else {
+        console.log(res.data.result);
         if (res.data.result.message != '') {
           wx.showToast({
             title: res.data.result.message,

@@ -2,13 +2,12 @@ const app = getApp();
 const util = require('util.js');
 const userInfo = wx.getStorageSync('userInfo');
 // 用户登录
-function userLogin(code, userInfo, callback) {
+function userLogin(code, callback) {
   var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0010_createUserFromMiniProgram.st";
   var data = {
     "code": code,
     "userInfo": JSON.stringify(userInfo)
   }
-  console.log(data);
   util.http(url, data, "POST", callback, false);
 }
 // 判断用户是否登陆
@@ -19,24 +18,9 @@ function isUserLogin() {
   }
   return true;
 }
-//获取用户信息
-function judgeMember(callBack) {
-  wx.showToast({
-    title: userInfo.userid,
-  })
-  var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_judgeMember.st";
-  var data = {
-    "userId": userInfo.userid
-  }
-  util.http(url, data, "GET", callBack, true);
-}
 
 // 会员注册
 function registerMember(callBack) {
-  console.log(userInfo);
-  wx.showToast({
-    title: userInfo.userid,
-  })
   var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerMember.st"
   var data = {
     "userid": userInfo.userid
@@ -53,12 +37,11 @@ function getAccountInfo(callBack) {
   util.http(url, data, "GET", callBack, false);
 }
 // 账户充值
-function registerAccount(total, accountType, callback) {
+function registerAccount(total, callback) {
   var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerAccount.st";
   var data = {
     "userid": userInfo.userid,
     "memberid": userInfo.memberid,
-    "type": accountType,
     "total": total
   }
   util.http(url, data, "POST", callback, false);
@@ -138,7 +121,7 @@ function createTheBorrowingRecord(machineId, bookCaseId, bookListId, bookId, cal
     bookId: bookId,
     memberId: userInfo.memberid
   }
-  var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_createTheBorrowingRecord.st";
+  var url = app.globalData.zbtcBase + "/DPlatform//btb/bro/fbro0020_createTheBorrowingRecord.st";
   util.http(url, data, "POST", callback, false);
 }
 // 正在借阅
@@ -151,7 +134,7 @@ function onGoingBorrowingRecord(callback) {
 }
 // 图书续借
 
-function rewBook(borrowRecordId, callback) {
+function onRewBook(borrowRecordId, callback) {
   var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_renewBook.st"
   var data = {
     "borrowRecordId": borrowRecordId
@@ -164,7 +147,7 @@ function rewBook(borrowRecordId, callback) {
 function createProblem(problemType, machineId, bookcaseId, borrowRecordId, content, remark, callBack) {
   let url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_createTheProblem.st"
   let data = {
-    "userId": wx.getStorageSync('userInfo').userid,
+    "userId": userInfo.userid,
     "type": problemType,
     "content": content,
     "machineId": machineId,
@@ -179,7 +162,6 @@ function createProblem(problemType, machineId, bookcaseId, borrowRecordId, conte
 module.exports = {
   userLogin: userLogin,
   isUserLogin: isUserLogin,
-  judgeMember: judgeMember,
   registerMember: registerMember,
   getAccountInfo: getAccountInfo,
   registerAccount: registerAccount,
@@ -188,7 +170,6 @@ module.exports = {
   getBookListByCategoryId: getBookListByCategoryId,
   getBookListDetailById: getBookListDetailById,
   shalveBook: shalveBook,
-  rewBook: rewBook,
   createProblem: createProblem,
   createTheBorrowingRecord: createTheBorrowingRecord,
   onGoingBorrowingRecord: onGoingBorrowingRecord,

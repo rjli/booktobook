@@ -21,13 +21,17 @@ Page({
         confirmText: "不不不不"
       })
     } else {
-      requestData.registerAccount(this.data.total,"钱包", this.processCharge);
+      requestData.registerAccount(this.data.total, this.processCharge);
     }
   },
   processCharge: function (data) {
     wx.navigateBack({
-      delta: 1,
+      delta: 2,
       success: (res) => {
+        wx.setStorage({
+          key: 'wallet',
+          data: parseInt(this.data.total)
+        })
         wx.showToast({
           title: "充值成功",
           icon: "success",
