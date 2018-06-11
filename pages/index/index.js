@@ -1,4 +1,5 @@
-var requestData = require("../../utils/requestData.js");
+var app = getApp();
+var util = require("../../utils/util.js");
 Page({
   data: {
     scale: 18,
@@ -42,7 +43,7 @@ Page({
           "latitude": res.latitude,
           "longitude": res.longitude
         }
-        requestData.findMachines(data, this.processMachinesData);
+        this.findMachines(data, this.processMachinesData);
       }
     });
 
@@ -158,18 +159,11 @@ Page({
         this.returnBook();
         break;
       case 4:
-        wx.scanCode({
-          scanType: "qrCode",
-          success: (res) => {
-            var id = res.result;
-            wx.hideLoading();
-            // 跳转到问题上报页面
-            wx.navigateTo({
-              url: '../problem/problem?machineId=' + id,
-            })
-          }, fail: (res) => {
-          }
+        // 跳转到问题上报页面
+        wx.navigateTo({
+          url: '../problem/problem?problemType=base',
         })
+      
         break;
       // 点击头像控件，跳转到个人中心
       case 6: wx.navigateTo({
@@ -195,7 +189,7 @@ Page({
             "latitude": res.latitude,
             "longitude": res.longitude
           }
-          requestData.findMachines(data, this.processMachinesData);
+          this.findMachines(data, this.processMachinesData);
         }
       });
     }
@@ -235,6 +229,11 @@ Page({
       hideShopPopup: true
     })
   },
+  // 根据条件获取借书机
+  findMachines: function (data, callBack) {
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_findMachines.st"
+    util.http(url, data, "GET", callBack, true);
+  },
   /**
    * 搜索控件获取焦点事件
    * 显示serach-pannel
@@ -246,12 +245,16 @@ Page({
     });
   },
   borrowBook: function () {
-    if (!requestData.isUserLogin) {
+    if (!app.isUserLogin) {
       wx.navigateTo({
         url: 'member/member',
       })
     }
-    requestData.onGoingBorrowingRecord(this.processBorrowData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_onGoingBorrowingRecord.st"
+    var data = {
+      "memberId": wx.getUserInfo.memberid
+    }
+    util.http(url, data, "GET", this.processBorrowData, false);
   },
   processBorrowData: function (data) {
     console.log(data);
@@ -267,8 +270,8 @@ Page({
           var id = res.result;
           wx.hideLoading();
           // 请求服务器获取借书机的信息
-          wx.navigateTo({
-            url: '../machines/machine/machine?id=' + id + '&type=bookList',
+          wx.redirectTo({
+            url: '../machines/machine/machine?id=' + id + '&type=bookList&btnType=borrow',
           })
         }, fail: (res) => {
         }
@@ -294,7 +297,7 @@ Page({
     var data = {
       "name": name
     }
-    requestData.findMachines(data, this.showSearchResult);
+    this.findMachines(data, this.showSearchResult);
 
   },
   showSearchResult: function (data) {
@@ -320,7 +323,7 @@ Page({
   onMachineTap: function (event) {
     let machineId = event.currentTarget.dataset.machineId;
     wx.navigateTo({
-      url: '../machines/machine/machine?id=' + machineId + '&type=bookList',
+      url: '../machines/machine/machine?id=' + machineId + '&type=bookList&btnType=simple',
     })
 
   },

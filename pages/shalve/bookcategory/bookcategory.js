@@ -1,6 +1,5 @@
 var app = getApp();
 var util = require("../../../utils/util.js");
-var requestData = require("../../../utils/requestData.js");
 Page({
   data: {
 
@@ -10,7 +9,8 @@ Page({
       machineId: options.machineId,
       bookcaseId: options.bookcaseId
     });
-    requestData.getBookCategoryList(this.processCategoryData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getBookKind.st"
+    util.http(url, {}, "GET", this.processCategoryData, false);
   },
   processCategoryData: function (data) {
     this.setData({

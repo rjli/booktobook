@@ -19,7 +19,6 @@ const formatNumber = n => {
  */
 function http(url, data, type, callBack, isNavBarLoading) {
   url = url + '?rkspAutoComplete=true';
-  console.log("isNavBarLoading:" + isNavBarLoading);
   if (isNavBarLoading) {
     wx.showNavigationBarLoading();
   } else {

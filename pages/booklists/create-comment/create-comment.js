@@ -1,5 +1,5 @@
 var app = getApp();
-var requestData = require("../../../utils/requestData.js");
+var util = require("../../../utils/util.js");
 Page({
   data: {
     rate: 0,
@@ -26,10 +26,18 @@ Page({
     this.setData({
       focus: false
     });
-    requestData.createComment(this.data.booklistId, "评论", this.data.rate, this.data.comment, this.processResultData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_createTheBookComment.st"
+    var data = {
+      "bookListId": this.data.booklistId,
+      "userId": wx.getStorageSync('userInfo').userid,
+      "type": "评论",
+      "score": this.data.rate,
+      "content": this.data.comment
+    }
+    util.http(url, data, "POST", this.processResultData, false);
   },
   processResultData: function (data) {
-    if (data.message.indexOf("成功")>0) {
+    if (data.message.indexOf("成功") > 0) {
       app.globalData.isBack = true
     }
     wx.navigateBack({

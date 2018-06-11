@@ -1,5 +1,5 @@
 var app = getApp();
-var requestData = require("../../utils/requestData.js");
+var util = require("../../utils/util.js");
 Page({
   data: {
     booklists: [],
@@ -28,7 +28,13 @@ Page({
     this.requestBookListData(this.data.totalCount);
   },
   requestBookListData: function (start) {
-    requestData.getBookListByCategoryId(this.data.bookkindId, start, this.data.defaultCount, this.processBooksData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getBookListsBykindId.st"
+    var data = {
+      "bookkindId": this.data.bookkindId,
+      "start": start,
+      "count": this.data.defaultCount
+    }
+    util.http(url, data, "GET", this.processBooksData, false);
   },
   processBooksData: function (data) {
     var booklists = data
@@ -72,7 +78,15 @@ Page({
     })
   },
   shalveData: function (booklistId) {
-    requestData.shalveBook(this.data.machineId, this.data.bookcaseId, booklistId, this.processShalveData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_shelfBook.st"
+    var data = {
+      "machineId": this.data.machineId,
+      "bookcaseId": this.data.bookcaseId,
+      "bookListId": this.processShalveData,
+      "userId": wx.getStorageSync('userInfo').userid
+    }
+    util.http(url, data, "POST", callBack, false);
+
   },
   processShalveData: function (data) {
     if (data.message.indexOf("成功") > 0) {

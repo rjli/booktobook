@@ -1,4 +1,5 @@
-var requestData = require("../../../utils/requestData.js");
+var app = getApp();
+var requestData = require("../../../utils/util.js");
 Page({
   data: {
     total: 0
@@ -21,7 +22,13 @@ Page({
         confirmText: "不不不不"
       })
     } else {
-      requestData.registerAccount(this.data.total, this.processCharge);
+      var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerAccount.st";
+      var data = {
+        "userid": wx.getStorageSync('userInfo').userid,
+        "memberid": userInfo.memberid,
+        "total": this.data.total
+      }
+      util.http(url, data, "POST", this.processCharge, false);
     }
   },
   processCharge: function (data) {

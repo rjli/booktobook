@@ -2,10 +2,16 @@
   <!-- <view class="problem-title">
     为您带来的不便感到非常抱歉，请您描述问题，管理人员将会第一时间解决
   </view> -->
+  <view class="qrcode" catchtap='onQrcodeTap'>
+    <!-- <indFocus" /> -->
+    <icon class="fa fa-qrcode" size='32'></icon>
+    <text wx:if="{{machineId}}" class="placeholder">{{machineId}}</text>
+    <text wx:else class="placeholder">点击扫描二维码</text>
+  </view>
   <view class="choose">
     <view class="title">请选择故障类型</view>
     <radio-group bindchange="radioboxChange" class="choose-grids">
-      <block wx:for="{{itemsValue}}" wx:key="{{item}}">
+      <block wx:for="{{issues}}" wx:key="{{item}}">
         <view class="grid">
           <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.value}}
         </view>

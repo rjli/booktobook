@@ -33,17 +33,17 @@
       </view>
     </view>
     <view class="operate-btn">
-      <button class="btn-common" catchtap='onRenewTap' data-borrow-record-id="{{borrowBook.id}}"> 续借</button>
+      <button class="btn-common" catchtap='onRenewTap' data-borrow-record-id="{{borrowBook.id}}" disabled="{{borrowBook.isRenew == '是'}}"> 续借 </button>
       <button class="btn-common" catchtap='onReturnTap' data-borrow-record-id="{{borrowBook.id}}"> 归还</button>
       <!-- <button class="btn-common"> 购买</button> -->
     </view>
-    <!-- <text class="problem"> 书籍破损或者是续借过程有误，请点击进行问题上报</text> -->
+     <text class="problem" catchtap="onProblemTap"> 书籍损坏或者续借，归还中遇到问题，请点击进行问题上报</text> 
     <view>
       <text>温馨提示</text>
       <text>每次借阅只能续借一次，续借之后延长10天</text>
     </view>
   </block>
-  <block wx:else >
+  <block wx:else>
     <template is="emptyTemplate" data="{{message}}" />
   </block>
 </view>

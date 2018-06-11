@@ -1,5 +1,5 @@
 var app = getApp();
-var requestData = require("../../utils/requestData.js");
+var util = require("../../utils/util.js");
 Page({
   data: {
     // 用户信息
@@ -15,6 +15,7 @@ Page({
         userInfo: userInfo,
         hasUserInfo: true
       })
+      this.updateUserInfo();
     }
     else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -27,6 +28,27 @@ Page({
       }
     }
   },
+  onShow: function (options) {
+    if (app.globalData.isBack) {
+      this.updateUserInfo();
+    }
+  },
+  updateUserInfo: function () {
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_judgeMember.st";
+    var data = {
+      "userId": this.data.userInfo.userid
+    }
+    util.http(url, data, "POST", this.processUpdateUserInfo, true);
+  },
+  processUpdateUserInfo: function (data) {
+    if (data) {
+      this.data.userInfo.bindUserId = data.banduserid ? data.banduserid : "";
+      this.data.userInfo.memberid = data.memberid ? data.memberid : "";
+      this.data.userInfo.memberStartDate = data.memberStartDate ? data.memberStartDate : "";
+      this.data.userInfo.memberExpirationDate = data.memberExpirationDate ? data.memberExpirationDate : "";
+      wx.setStorageSync('userInfo', this.data.userInfo);
+    }
+  },
   getUserInfo: function (event) {
     var that = this;
     wx.login({
@@ -34,7 +56,12 @@ Page({
         this.setData({
           tempUser: event.detail.userInfo
         });
-        requestData.userLogin(res.code, this.processLogin);
+        var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0010_createUserFromMiniProgram.st";
+        var data = {
+          "code": res.code,
+          "userInfo": JSON.stringify(event.detail.userInfo)
+        }
+        util.http(url, data, "POST", this.processLogin, false);
       }
     })
 

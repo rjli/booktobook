@@ -1,6 +1,5 @@
 var app = getApp();
 var util = require("../../../utils/util.js");
-var requestData = require("../../../utils/requestData.js");
 Page({
   data: {
     book: ""
@@ -12,12 +11,17 @@ Page({
       bookCaseId: options.bookCaseId,
       bookId: options.bookId,
       bookCaseNumber: options.bookCaseNumber,
-      bookListId: options.bookListId
+      bookListId: options.bookListId,
+      btnType: options.btnType
     });
     this.requestBooklistDetail();
   },
   requestBooklistDetail: function () {
-    requestData.getBookListDetailById(this.data.bookListId, this.processBookData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_findBookDetailById.st"
+    var data = {
+      "bookListId": this.data.bookListId,
+    }
+    util.http(url, data, "GET", this.processBookData, false);
   },
   onShow: function (options) {
     if (app.globalData.isBack) {
@@ -29,7 +33,15 @@ Page({
    * 请求服务器，实现结束的打开柜门的操作
    */
   onBorrowTap: function (event) {
-    requestData.createTheBorrowingRecord(this.data.machineId, this.data.bookCaseId, this.data.book.id, this.data.bookId, this.processResult);
+    var data = {
+      machineId: this.data.machineId,
+      bookcaseId: this.data.bookCaseId,
+      bookListId: this.data.book.id,
+      bookId: this.data.bookId,
+      memberId: wx.getStorageSync('userInfo').memberid
+    }
+    var url = app.globalData.zbtcBase + "/DPlatform//btb/bro/fbro0020_createTheBorrowingRecord.st";
+    util.http(url, data, "POST", this.processResult, false);
   },
   /**
    * 预览图片信息
@@ -58,7 +70,14 @@ Page({
    */
   processResult: function (data) {
     wx.showToast({
-      title: data.message
+      title: data.message,
+      success: function () {
+        if (data.message.indexOf("成功") > 0) {
+          wx.redirectTo({
+            url: '../../borrow/borrow',
+          })
+        }
+      }
     })
   },
   goToMoreComments: function (event) {

@@ -1,10 +1,11 @@
-var requestData = require("../../../utils/requestData.js");
+var app = getApp();
+var util = require("../../../utils/util.js");
 Page({
   data: {
     comments: [],
     totalCount: 0,
     isEmpty: true,
-    defaultCount:8
+    defaultCount: 8
   },
   onLoad: function (options) {
     var booklistId = options.boolistId;
@@ -26,7 +27,13 @@ Page({
     this.requestComments(this.data.totalCount);
   },
   requestComments: function (start) {
-    requestData.findComments(this.data.booklistId, start, this.data.defaultCount,this.processCommentsData);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_findBookCommentById.st"
+    var data = {
+      "bookListId": this.data.booklistId,
+      "start": start,
+      "count": this.data.defaultCount
+    }
+    util.http(url, data, "GET", this.processCommentsData, false);
   },
   processCommentsData: function (data) {
     var comments = data;

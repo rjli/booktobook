@@ -1,6 +1,5 @@
-var util = require("../../utils/util.js");
 var app = getApp();
-var requestData = require("../../utils/requestData.js");
+var util = require("../../utils/util.js");
 Page({
 
   /**
@@ -67,7 +66,11 @@ Page({
     }
   },
   registerMember: function (data) {
-    requestData.registerMember(this.processRegisterMember);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerMember.st"
+    var data = {
+      "userid": this.data.userInfo.userid
+    }
+    util.http(url, data, "POST", this.processRegisterMember, false);
   },
   processRegisterMember: function (data) {
     var userInfo = this.data.userInfo;
@@ -82,5 +85,6 @@ Page({
     wx.showToast({
       title: '会员申请成功',
     })
+    app.globalData.isBack = true;
   }
 })

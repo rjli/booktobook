@@ -1,15 +1,31 @@
 .container {
-  padding: 0 40rpx;
+  padding: 0rpx 40rpx;
 }
 
-.title {
-  padding: 20rpx 0 20rpx 40rpx;
-  font-size: 28rpx;
+.qrcode {
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+  color: #999;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+
+.qrcode text {
+  height: 100%;
+  width: 600rpx;
+  margin-left: 10px;
+  font-size: 32rpx;
 }
 
 .choose {
   background-color: #fff;
   font-size: 24rpx;
+}
+
+.choose .title {
+  font-size: 24rpx;
+  background-color: #fff;
+  padding: 20rpx 0 0 40rpx;
 }
 
 .choose-grids {
@@ -30,7 +46,6 @@
 .choose-grids .grid:first-child, .choose-grids .grid:nth-of-type(2) {
   margin-top: 0;
 }
-
 
 .content textarea {
   padding: 20rpx;

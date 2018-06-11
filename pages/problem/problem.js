@@ -1,5 +1,5 @@
 var app = getApp();
-var requestData = require("../../utils/requestData.js");
+var util = require("../../utils/util.js");
 Page({
   data: {
     picUrls: [],// 故障图路径数组
@@ -7,7 +7,7 @@ Page({
     content: "",
     remark: "",
     problemId: "",
-    itemsValue: [
+    issues: [
       {
         checked: false,
         value: "二维码不对"
@@ -25,13 +25,74 @@ Page({
         value: "其他故障"
       }
     ],
+
     disabled: true,
     bookcaseId: ""
   },
   onLoad: function (options) {
-    let machineId = options.machineId;
+    let problemType = options.problemType;
+    console.log(problemType);
+    let issues = [];
+    if (problemType == 'base') {
+      issues = [
+        {
+          checked: false,
+          value: "二维码不对"
+        },
+        {
+          checked: false,
+          value: "借书机信息有误"
+        },
+        {
+          checked: false,
+          value: "借书机柜门无法打开"
+        },
+        {
+          checked: false,
+          value: "其他故障"
+        }
+      ]
+    } else if (problemType == 'book') {
+      issues= [
+        {
+          checked: false,
+          value: "书籍不对应"
+        },
+        {
+          checked: false,
+          value: "书籍破损"
+        },
+        {
+          checked: false,
+          value: "续借失败"
+        },
+        {
+          checked: false,
+          value: "还书失败"
+        },
+        {
+          checked: false,
+          value: "其他问题"
+        }
+      ]
+      this.setData({ borrowRecordId: options.borrowRecordId })
+    }
     this.setData({
-      machineId: machineId
+      issues: issues
+    })
+  },
+  onQrcodeTap: function (event) {
+    wx.scanCode({
+      scanType: "qrCode",
+      success: (res) => {
+        let machineId = res.result;
+        this.setData({
+          machineId: machineId
+        })
+        wx.hideLoading();
+
+      }, fail: (res) => {
+      }
     })
   },
   radioboxChange: function (event) {
@@ -46,7 +107,7 @@ Page({
     }
     this.setData({
       itemsValue: tempItemsValue,
-      remark: value,
+      content: value,
       disabled: false
     })
   },
@@ -82,12 +143,22 @@ Page({
   },
   onProblemBlur: function (event) {
     this.setData({
-      content: event.detail.value
+      remark: event.detail.value
     })
   },
   //问题上报
   onProblemTap: function (event) {
-    requestData.createProblem("故障保修", this.data.machineId, this.data.bookcaseId, "", this.data.content, this.data.remark, this.processProblemData);
+    let url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_createTheProblem.st"
+    let data = {
+      "userId": wx.getStorageSync('userInfo').userid,
+      "type": "故障保修",
+      "content": this.data.content,
+      "machineId": this.data.machineId,
+      "remark": this.data.remark,
+      "bookcaseId": this.data.bookcaseId ? this.data.bookcaseId : "",
+      "borrowRecordId": this.data.borrowRecordId ? this.data.borrowRecordId : ""
+    }
+    util.http(url, data, "POST", this.processProblemData, false);
   },
   processProblemData: function (data) {
     let length = this.data.picUrls.length; //总共个数

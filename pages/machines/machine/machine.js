@@ -6,6 +6,7 @@ Page({
   },
   onLoad: function (options) {
     var optiontype = options.type;
+    var btnType = options.btnType;
     if ("all" == optiontype || "bookCase" == optiontype) {
       var caseType = options.caseType;
       this.setData({
@@ -25,7 +26,8 @@ Page({
 
     this.setData({
       machineId: options.id,
-      optiontype: optiontype
+      optiontype: optiontype,
+      btnType: btnType
     })
     this.getMachineDetil();
   },
@@ -79,12 +81,11 @@ Page({
     var bookId = event.currentTarget.dataset.bookId;
     var bookCaseNumber = event.currentTarget.dataset.bookCaseNumber;
     wx.navigateTo({
-      url: '../../booklists/booklist-detail/booklist-detail?machineId=' + machineId + "&bookListId=" + bookListId + "&bookCaseId=" + bookCaseId + "&bookId=" + bookId + "&bookCaseNumber=" + bookCaseNumber,
+      url: '../../booklists/booklist-detail/booklist-detail?machineId=' + machineId + "&bookListId=" + bookListId + "&bookCaseId=" + bookCaseId + "&bookId=" + bookId + "&bookCaseNumber=" + bookCaseNumber + "&btnType=" + this.data.btnType,
     })
   },
   radioChange: function (event) {
     var items = this.data.bookCases;
-
     for (var i = 0, len = items.length; i < len; ++i) {
       items[i].checked = items[i].bookcaseid == event.detail.value
       if (items[i].checked && items[i].note) {
@@ -127,6 +128,20 @@ Page({
     })
   },
   processReturnBookData: function (data) {
-    console.log(data);
+    if (!!data) {
+      if (data.message.indexOf('成功') > 0) {
+        wx.navigateBack({
+          delta: 2,
+          success: wx.showToast({
+            title: data.message,
+          })
+        })
+      }
+    } else {
+      wx.showToast({
+        title: data.message,
+      })
+    }
+
   }
 })
