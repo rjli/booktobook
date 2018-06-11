@@ -15,6 +15,8 @@ Page({
    */
   onLoad: function (options) {
     var userInfo = wx.getStorageSync("userInfo");
+    console.log("用户信息");
+    console.log(userInfo);
     this.setData({
       userInfo: userInfo
     })
@@ -82,5 +84,6 @@ Page({
     wx.showToast({
       title: '会员申请成功',
     })
+    app.globalData.isBack = true;
   }
 })

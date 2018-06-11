@@ -15,6 +15,7 @@ Page({
         userInfo: userInfo,
         hasUserInfo: true
       })
+      this.judgeMember();
     }
     else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -27,6 +28,25 @@ Page({
       }
     }
   },
+  onShow: function (options) {
+    if (app.globalData.isBack) {
+      app.globalData.isBack = false;
+      this.judgeMember();
+    }
+  },
+  judgeMember: function () {
+    requestData.judgeMember(this.processUpdataUserInfo);
+  },
+  processUpdataUserInfo: function (data) {
+    console.log("update userinfo")
+    console.log(data);
+    this.data.userInfo.binduserid = data.binduserid ? data.binduserid : "";
+    this.data.userInfo.memberid = data.memberid ? data.memberid : "";
+    this.data.userInfo.memberExpirationDate = data.memberExpirationDate ? data.memberExpirationDate : "";
+    this.data.userInfo.memberStartTime = data.memberStartTime ? data.memberStartTime : "";
+    console.log(this.data.userInfo);
+    wx.setStorageSync('userInfo', this.data.userInfo);
+  },
   getUserInfo: function (event) {
     var that = this;
     wx.login({
@@ -34,7 +54,7 @@ Page({
         this.setData({
           tempUser: event.detail.userInfo
         });
-        requestData.userLogin(res.code, this.processLogin);
+        requestData.userLogin(res.code, event.detail.userInfo, this.processLogin);
       }
     })
 

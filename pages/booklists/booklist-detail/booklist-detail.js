@@ -12,8 +12,10 @@ Page({
       bookCaseId: options.bookCaseId,
       bookId: options.bookId,
       bookCaseNumber: options.bookCaseNumber,
-      bookListId: options.bookListId
+      bookListId: options.bookListId,
+      btnType: options.btnType
     });
+    console.log(this.data)
     this.requestBooklistDetail();
   },
   requestBooklistDetail: function () {
@@ -60,6 +62,11 @@ Page({
     wx.showToast({
       title: data.message
     })
+    if (data.message.indexOf("success") > 0) {
+      wx.redirectTo({
+        url: '../../borrow/borrow',
+      })
+    }
   },
   goToMoreComments: function (event) {
     wx.navigateTo({

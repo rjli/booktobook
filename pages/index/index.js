@@ -259,16 +259,11 @@ Page({
       wx.scanCode({
         scanType: "qrCode",
         success: (res) => {
-          // 正在获取借书机信息
-          wx.showLoading({
-            title: '正在获取借书机信息',
-            mask: true
-          })
           var id = res.result;
           wx.hideLoading();
           // 请求服务器获取借书机的信息
           wx.navigateTo({
-            url: '../machines/machine/machine?id=' + id + '&type=bookList',
+            url: '../machines/machine/machine?id=' + id + '&type=bookList&btnType=borrow',
           })
         }, fail: (res) => {
         }
@@ -320,7 +315,7 @@ Page({
   onMachineTap: function (event) {
     let machineId = event.currentTarget.dataset.machineId;
     wx.navigateTo({
-      url: '../machines/machine/machine?id=' + machineId + '&type=bookList',
+      url: '../machines/machine/machine?id=' + machineId + '&type=bookList&btnType=simple',
     })
 
   },
