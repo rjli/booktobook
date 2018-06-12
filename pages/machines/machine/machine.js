@@ -112,7 +112,7 @@ Page({
             var borrowRecordId = that.data.borrowRecordId;
             var delayMoney = that.data.delayMoney;
             var overDay = that.data.overDay;
-            var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_updateBorrowingRecord.st"
+            var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_updateBorrowingRecord.st"
             var data = {
               "rkspAutoComplete": true,
               "machineId": machineId,

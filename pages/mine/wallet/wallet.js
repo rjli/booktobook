@@ -7,7 +7,7 @@ Page({
   },
   // 页面加载
   onLoad: function (options) {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_getMyWallet.st";
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_getMyWallet.st";
     var data = {
       "memberId": wx.getStorageSync('userInfo').memberid
     }

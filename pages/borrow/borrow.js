@@ -26,7 +26,7 @@ Page({
   },
   onRenewTap: function (event) {
     var borrowRecordId = event.currentTarget.dataset.borrowRecordId;
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_renewBook.st"
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_renewBook.st"
     var data = {
       "borrowRecordId": borrowRecordId
     }

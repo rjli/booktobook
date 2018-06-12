@@ -24,8 +24,8 @@ Page({
     } else {
       var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerAccount.st";
       var data = {
-        "userid": wx.getStorageSync('userInfo').userid,
-        "memberid": userInfo.memberid,
+        "userId": wx.getStorageSync('userInfo').userid,
+        "memberId": userInfo.memberid,
         "total": this.data.total
       }
       util.http(url, data, "POST", this.processCharge, false);

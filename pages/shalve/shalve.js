@@ -28,7 +28,7 @@ Page({
     this.requestBookListData(this.data.totalCount);
   },
   requestBookListData: function (start) {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getBookListsBykindId.st"
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_getBookListsBykindId.st"
     var data = {
       "bookkindId": this.data.bookkindId,
       "start": start,
@@ -78,7 +78,7 @@ Page({
     })
   },
   shalveData: function (booklistId) {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_shelfBook.st"
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_shelfBook.st"
     var data = {
       "machineId": this.data.machineId,
       "bookcaseId": this.data.bookcaseId,

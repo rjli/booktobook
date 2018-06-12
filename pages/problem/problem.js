@@ -148,7 +148,7 @@ Page({
   },
   //问题上报
   onProblemTap: function (event) {
-    let url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_createTheProblem.st"
+    let url = app.globalData.zbtcBase + "/DPlatform/btb/pro/fpro0020_createTheProblem.st"
     let data = {
       "userId": wx.getStorageSync('userInfo').userid,
       "type": "故障保修",
@@ -191,7 +191,7 @@ Page({
   // 多文件上传函数
   uploadFiles(filePaths, successUp, failUp, i, length) {
     wx.uploadFile({
-      url: app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_uploadfile.st?rkspAutoComplete=true",
+      url: app.globalData.zbtcBase + "/DPlatform/btb/pro/fpro0020_uploadfile.st?rkspAutoComplete=true",
       filePath: filePaths[i],
       name: 'file',
       formData: {

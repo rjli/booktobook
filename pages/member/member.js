@@ -68,7 +68,7 @@ Page({
   registerMember: function (data) {
     var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerMember.st"
     var data = {
-      "userid": this.data.userInfo.userid
+      "userId": this.data.userInfo.userid
     }
     util.http(url, data, "POST", this.processRegisterMember, false);
   },

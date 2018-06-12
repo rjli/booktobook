@@ -9,7 +9,7 @@ Page({
       machineId: options.machineId,
       bookcaseId: options.bookcaseId
     });
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getBookKind.st"
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_getBookKind.st"
     util.http(url, {}, "GET", this.processCategoryData, false);
   },
   processCategoryData: function (data) {

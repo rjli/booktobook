@@ -17,7 +17,7 @@ Page({
     this.requestBooklistDetail();
   },
   requestBooklistDetail: function () {
-    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_findBookDetailById.st"
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_findBookDetailById.st"
     var data = {
       "bookListId": this.data.bookListId,
     }
