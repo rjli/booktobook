@@ -1,16 +1,17 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
+    "pages/mine/mine",
     "pages/problem/problem",
     "pages/booklists/comments/comments",
     "pages/booklists/create-comment/create-comment",
-    "pages/mine/mine",
+    "pages/mine/about/about",
     "pages/mine/wallet/wallet",
     "pages/member/member",
     "pages/booklists/booklist-detail/booklist-detail",
     "pages/machines/machine/machine",
     "pages/mine/charge/charge",
-    "pages/mine/about/about",
     "pages/borrow/borrow",
     "pages/shalve/shalve",
     "pages/shalve/bookcategory/bookcategory"

@@ -65,12 +65,58 @@ Page({
       );
     }
   },
-  registerMember: function (data) {
+  doUndifiedOrder: function () {
+    console.log(this.data.userInfo.openid);
+    var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0020_goToUnifiedOrder.st"
+    var data = {
+      "type": "会员费充值",
+      "openid": this.data.userInfo.openid,
+      "totalMoney": "0.01"
+    }
+    util.http(url, data, "POST", this.processUndifiedOrder, false);
+
+  },
+  processUndifiedOrder: function (data) {
+    console.log(data);
+    if (data.message.indexOf('成功') > 0) {
+      wx.requestPayment(
+        {
+          'timeStamp': data.timeStamp,
+          'nonceStr': data.nonceStr,
+          'package': data.package,
+          'signType': data.signType,
+          'paySign': data.paySign,
+          'success': res => {
+            console.log(res);
+            wx.showToast({
+              title: '操作成功',
+            })
+            this.registerMember(data.outTradeNo);
+          },
+          'fail': res => {
+            console.log(res);
+            wx.showToast({
+              title: res.errMsg,
+            })
+          },
+          'complete': res => { }
+        })
+    } else {
+      wx.showToast({
+        title: '支付请求失败，请稍候在试',
+      })
+    }
+  },
+  registerMember: function (outTradeNo) {
+    wx.showToast({
+      title: '开始更新会员信息',
+    })
     var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerMember.st"
     var data = {
-      "userId": this.data.userInfo.userid
+      "userId": this.data.userInfo.userid,
+      "orderNum": outTradeNo
     }
-    util.http(url, data, "POST", this.processRegisterMember, false);
+    util.http(url, data, "POST", this.processRegisterMember, false)
   },
   processRegisterMember: function (data) {
     var userInfo = this.data.userInfo;

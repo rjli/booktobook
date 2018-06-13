@@ -35,5 +35,4 @@ Page({
       url: '../charge/charge'
     })
   }
-
 })

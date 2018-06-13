@@ -1,0 +1,68 @@
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  /* border-radius: 20rpx; */
+  opacity: 0.5;
+  overflow: hidden;
+}
+
+.hr-10 {
+  height: 1px;
+  width: 100%;
+  background-color: #d9d9d9;
+}
+
+/*content*/
+
+.drawer_box {
+  width: 650rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 40%;
+  left: 0;
+  z-index: 1001;
+  background: #fafafa;
+  margin: -150px 50rpx 0 50rpx;
+  border-radius: 8px;
+}
+
+.drawer_title {
+  padding: 15px;
+  font: 20px "microsoft yahei";
+  text-align: center;
+}
+
+.drawer_content {
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx 40rpx;
+}
+
+.drawer_content text {
+  padding-bottom: 20rpx;
+  letter-spacing: 4rpx;
+  color: #333;
+}
+
+.btn_ok {
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+  text-align: center;
+  margin: 20rpx 100rpx;
+  background: #06c;
+  color: #fff;
+}
+
+.close-img {
+  height: 24rpx;
+  width: 24rpx;
+  position: absolute;
+  margin-top: 10rpx;
+  margin-left: 220rpx;
+}

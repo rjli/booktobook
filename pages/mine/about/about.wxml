@@ -1,4 +1,4 @@
-<view class="container">
+ <view class="container">
   <swiper vertical="{{false}}" indicator-dots="true" autoplay="true" interval="5000">
     <swiper-item>
       <image src="/images/about/jsf1.jpg"></image>
@@ -37,4 +37,4 @@
       <text class="detail" catchtap='onOpenLocationTap'>体育路与晋阳街交叉口北美金棕榈2号楼底商</text>
     </view>
   </view>
-</view>
+</view> 

@@ -3,12 +3,15 @@ App({
     zbtcBase: "https://abc.rchjxx.com",
     isBack: false
   },
-  isUserLogin:function(){
-    let  userInfo= wx.getStorageSync('userInfo');
-    let flag = false;
+  isUserLogin: function () {
+    let result = true;
+    let userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {
-      flag = true;
+      wx.navigateTo({
+        url: '../login/login'
+      })
+      result = false;
     }
-    return true;
+    return result;
   }
 })

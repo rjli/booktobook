@@ -15,8 +15,6 @@
       </block>
     </view>
   </view>
-  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" lang="zh_CN"> 登录</button>
-
   <block wx:if="{{userInfo.memberid != ''}}">
 
     <view class="tapbar" bindtap="movetoWallet">

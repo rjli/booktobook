@@ -1,5 +1,4 @@
 Component({
-  behaviors: [],
   properties: {
     rate: {
       type: String,

@@ -2,6 +2,7 @@ var app = getApp();
 var util = require("../../utils/util.js");
 Page({
   data: {
+    hasUserInfo: false,
     scale: 18,
     latitude: 0,
     longitude: 0,
@@ -16,6 +17,12 @@ Page({
   },
   // 页面加载
   onLoad: function (options) {
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo) {
+      this.setData({
+        hasUserInfo: true
+      })
+    }
     this.initMap();
   },
   // 页面显示
@@ -24,9 +31,18 @@ Page({
       containerShow: true,
       searchPanelShow: false,
     })
+    if (app.globalData.isBack) {
+      app.globalData.isBack = false;
+      this.setData({
+        hasUserInfo: true
+      })
+    }
     // 1.创建地图上下文，移动当前位置到地图中心
     this.mapCtx = wx.createMapContext("bookMap");
     this.movetoPosition();
+  },
+  onLoginTap: function () {
+    app.isUserLogin();
   },
   //初始化地图页面信息
   initMap: function () {
@@ -159,16 +175,23 @@ Page({
         this.returnBook();
         break;
       case 4:
+        if (!app.isUserLogin()) {
+          return;
+        }
         // 跳转到问题上报页面
         wx.navigateTo({
           url: '../problem/problem?problemType=base',
         })
-      
+
         break;
       // 点击头像控件，跳转到个人中心
-      case 6: wx.navigateTo({
-        url: '../mine/mine'
-      });
+      case 6:
+        if (!app.isUserLogin()) {
+          return;
+        }
+        wx.navigateTo({
+          url: '../mine/mine'
+        });
         break;
       default: break;
     }
@@ -196,6 +219,9 @@ Page({
   },
   // 地图标记点击事件，连接用户位置和点击借书机的位置
   markerTap: function (e) {
+    if (!app.isUserLogin()) {
+      return;
+    }
     //查询marker的详细信息
     var marker = this.getMarkerById(e.markerId);
     var machine = marker;
@@ -239,17 +265,21 @@ Page({
    * 显示serach-pannel
    */
   onBindFocus: function (event) {
+    if (!app.isUserLogin()) {
+      return;
+    }
     this.setData({
       containerShow: false,
       searchPanelShow: true
     });
   },
   borrowBook: function () {
-    if (!app.isUserLogin) {
-      wx.navigateTo({
-        url: 'member/member',
-      })
+    if (!app.isUserLogin()) {
+      return;
     }
+    wx.navigateTo({
+      url: 'member/member',
+    })
     var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_onGoingBorrowingRecord.st"
     var data = {
       "memberId": wx.getUserInfo.memberid
@@ -257,7 +287,6 @@ Page({
     util.http(url, data, "GET", this.processBorrowData, false);
   },
   processBorrowData: function (data) {
-    console.log(data);
     if (data.length <= 0) {
       wx.scanCode({
         scanType: "qrCode",
@@ -284,6 +313,9 @@ Page({
     }
   },
   returnBook: function () {
+    if (!app.isUserLogin()) {
+      return;
+    }
     wx.navigateTo({
       url: '../borrow/borrow',
     })

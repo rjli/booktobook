@@ -67,5 +67,5 @@
     <text>●  会员为虚拟产品，已经付费概不退款，敬请谅解</text>
   </view>
   <view class='hr'></view>
-  <view class="btn_ok" bindtap="registerMember">购买 99元/年</view>
+  <view class="btn_ok" bindtap="doUndifiedOrder">购买 99元/年</view>
 </view>
