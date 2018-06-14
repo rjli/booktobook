@@ -37,31 +37,31 @@ Page({
     }
   },
   // 跳转至钱包
-  movetoWallet: function (event) {
+  movetoWallet: util.throttle( function (event) {
     wx.navigateTo({
       url: 'wallet/wallet'
     })
-  },
-  movetoAbout: function (event) {
+  }),
+  movetoAbout: util.throttle( function (event) {
     wx.navigateTo({
       url: 'about/about'
     })
-  },
-  moveToRegisterMember: function (event) {
+  }),
+  moveToRegisterMember: util.throttle(function (event) {
     wx.navigateTo({
       url: '../member/member',
     })
-  },
+  }),
   /**
    * 获取正在借阅的书籍
    */
-  onBorrowTap: function (event) {
+  onBorrowTap: util.throttle(function (event) {
     wx.navigateTo({
       url: '../borrow/borrow',
     })
-  },
+  }),
   // 图书上架
-  onShalveTap: function (event) {
+  onShalveTap: util.throttle(function (event) {
     wx.scanCode({
       scanType: "qrCode",
       success: (res) => {
@@ -72,5 +72,5 @@ Page({
       }, fail: (res) => {
       }
     })
-  }
+  })
 })

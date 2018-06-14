@@ -7,31 +7,12 @@ Page({
     content: "",
     remark: "",
     problemId: "",
-    issues: [
-      {
-        checked: false,
-        value: "二维码不对"
-      },
-      {
-        checked: false,
-        value: "借书机信息有误"
-      },
-      {
-        checked: false,
-        value: "借书机柜门无法打开"
-      },
-      {
-        checked: false,
-        value: "其他故障"
-      }
-    ],
-
+    issues: [],
     disabled: true,
     bookcaseId: ""
   },
   onLoad: function (options) {
     let problemType = options.problemType;
-    console.log(problemType);
     let issues = [];
     if (problemType == 'base') {
       issues = [
@@ -53,7 +34,7 @@ Page({
         }
       ]
     } else if (problemType == 'book') {
-      issues= [
+      issues = [
         {
           checked: false,
           value: "书籍不对应"
@@ -97,8 +78,8 @@ Page({
   },
   radioboxChange: function (event) {
     let value = event.detail.value;
-    var tempItemsValue = this.data.itemsValue;
-    for (let item of tempItemsValue) {
+    var issues = this.data.issues;
+    for (let item of issues) {
       if (item.value == value) {
         item.checked = true;
       } else {
@@ -106,7 +87,7 @@ Page({
       }
     }
     this.setData({
-      itemsValue: tempItemsValue,
+      issues: issues,
       content: value,
       disabled: false
     })
@@ -142,6 +123,7 @@ Page({
     })
   },
   onProblemBlur: function (event) {
+    console.log(event.detail.value)
     this.setData({
       remark: event.detail.value
     })
@@ -153,7 +135,7 @@ Page({
       "userId": wx.getStorageSync('userInfo').userid,
       "type": "故障保修",
       "content": this.data.content,
-      "machineId": this.data.machineId,
+      "machineId": this.data.machineId ? this.data.machineId : "",
       "remark": this.data.remark,
       "bookcaseId": this.data.bookcaseId ? this.data.bookcaseId : "",
       "borrowRecordId": this.data.borrowRecordId ? this.data.borrowRecordId : ""

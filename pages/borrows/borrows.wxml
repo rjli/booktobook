@@ -1,0 +1,10 @@
+<import src="borrow-grid/borrow-grid-template.wxml" />
+<import src="../empty/empty-template.wxml" />
+<view class='container'>
+  <block wx:if="{{borrowRecords.length>0}}">
+    <template is="borrowGridTemplate" data="{{borrowRecords}}" />
+  </block>
+  <block wx:else>
+    <template is="emptyTemplate" data="{{message}}" />
+  </block>
+</view>

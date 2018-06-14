@@ -1,0 +1,10 @@
+<import src="../borrow/borrow-template.wxml" />
+<template name="borrowGridTemplate">
+  <view class="grid-container">
+    <block wx:for="{{borrowRecords}}" wx:for-item="borrowRecord">
+      <view class="single-view-container">
+        <template is="borrowTemplate" data="{{...borrowRecord}}" />
+      </view>
+    </block>
+  </view>
+</template>

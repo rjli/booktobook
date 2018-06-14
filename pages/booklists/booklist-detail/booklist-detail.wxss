@@ -1,6 +1,4 @@
 /* pages/book/book.wxss */
-
-/* @import "../stars/stars-template.wxss"; */
 @import "../comment/comment-template.wxss";
 
 .container {

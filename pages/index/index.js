@@ -41,9 +41,9 @@ Page({
     this.mapCtx = wx.createMapContext("bookMap");
     this.movetoPosition();
   },
-  onLoginTap: function () {
+  onLoginTap: util.throttle(function () {
     app.isUserLogin();
-  },
+  }),
   //初始化地图页面信息
   initMap: function () {
     // 1.获取并设置当前位置经纬度
@@ -175,27 +175,32 @@ Page({
         this.returnBook();
         break;
       case 4:
-        if (!app.isUserLogin()) {
-          return;
-        }
-        // 跳转到问题上报页面
-        wx.navigateTo({
-          url: '../problem/problem?problemType=base',
-        })
-
+        this.gotoProblem();
         break;
       // 点击头像控件，跳转到个人中心
       case 6:
-        if (!app.isUserLogin()) {
-          return;
-        }
-        wx.navigateTo({
-          url: '../mine/mine'
-        });
+        this.goToMine();
         break;
       default: break;
     }
   },
+  gotoProblem: util.throttle(function () {
+    if (!app.isUserLogin()) {
+      return;
+    }
+    // 跳转到问题上报页面
+    wx.navigateTo({
+      url: '../problem/problem?problemType=base',
+    })
+  }),
+  goToMine: util.throttle(function () {
+    if (!app.isUserLogin()) {
+      return;
+    }
+    wx.navigateTo({
+      url: '../mine/mine'
+    });
+  }),
   // 地图视野改变事件
   bindregionchange: function (e) {
     // 拖动地图，获取附件单车位置
@@ -273,7 +278,7 @@ Page({
       searchPanelShow: true
     });
   },
-  borrowBook: function () {
+  borrowBook: util.throttle(function () {
     if (!app.isUserLogin()) {
       return;
     }
@@ -285,7 +290,7 @@ Page({
       "memberId": wx.getUserInfo.memberid
     }
     util.http(url, data, "GET", this.processBorrowData, false);
-  },
+  }),
   processBorrowData: function (data) {
     if (data.length <= 0) {
       wx.scanCode({
@@ -299,7 +304,7 @@ Page({
           var id = res.result;
           wx.hideLoading();
           // 请求服务器获取借书机的信息
-          wx.redirectTo({
+          wx.navigateTo({
             url: '../machines/machine/machine?id=' + id + '&type=bookList&btnType=borrow',
           })
         }, fail: (res) => {
@@ -312,14 +317,14 @@ Page({
       })
     }
   },
-  returnBook: function () {
+  returnBook: util.throttle(function () {
     if (!app.isUserLogin()) {
       return;
     }
     wx.navigateTo({
       url: '../borrow/borrow',
     })
-  },
+  }),
 
   /**
    *搜索借书机
@@ -343,22 +348,21 @@ Page({
       })
     }
   },
-  onCancelImgTap: function (event) {
+  onCancelImgTap: util.throttle(function (event) {
     this.setData({
       containerShow: true,
       searchPanelShow: false
     });
-  },
+  }),
   /**
    * 跳转到借书机页面
    */
-  onMachineTap: function (event) {
+  onMachineTap: util.throttle(function (event) {
     let machineId = event.currentTarget.dataset.machineId;
     wx.navigateTo({
       url: '../machines/machine/machine?id=' + machineId + '&type=bookList&btnType=simple',
     })
-
-  },
+  }),
   // 定位函数，移动位置到地图中心
   movetoPosition: function () {
     this.mapCtx.moveToLocation();

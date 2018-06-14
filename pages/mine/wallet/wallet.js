@@ -30,9 +30,9 @@ Page({
     wx.setStorageSync('redpacket', data.redpacket);
   },
   // 跳转到充值页面
-  movetoCharge: function () {
+  movetoCharge: util.throttle( function () {
     wx.navigateTo({
       url: '../charge/charge'
     })
-  }
+  })
 })

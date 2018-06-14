@@ -2,7 +2,7 @@
   <!-- <view class="problem-title">
     为您带来的不便感到非常抱歉，请您描述问题，管理人员将会第一时间解决
   </view> -->
-  <view class="qrcode" catchtap='onQrcodeTap'>
+  <view class="qrcode" wx:if="{{problemType=='base'}}" catchtap='onQrcodeTap'>
     <!-- <indFocus" /> -->
     <icon class="fa fa-qrcode" size='32'></icon>
     <text wx:if="{{machineId}}" class="placeholder">{{machineId}}</text>

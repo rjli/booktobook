@@ -131,7 +131,7 @@ Page({
     if (!!data) {
       if (data.message.indexOf('成功') > 0) {
         wx.navigateBack({
-          delta: 2,
+          delta: 3,
           success: wx.showToast({
             title: data.message,
           })

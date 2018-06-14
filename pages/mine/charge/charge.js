@@ -16,7 +16,7 @@ Page({
       total: event.detail.value
     })
   },
-  doUndifiedOrder: function () {
+  doUndifiedOrder: util.throttle(function () {
     if (parseInt(this.data.total) <= 0 || isNaN(this.data.total)) {
       wx.showModal({
         title: "警告",
@@ -33,7 +33,7 @@ Page({
       }
       util.http(url, data, "POST", this.processUndifiedOrder, false);
     }
-  },
+  }),
   processUndifiedOrder: function (data) {
     if (data.message.indexOf('成功') > 0) {
       wx.requestPayment(
@@ -79,7 +79,7 @@ Page({
     wx.navigateBack({
       delta: 1,
       success: (res) => {
-        wx.setStorage({
+        wx.setStorageSync({
           key: 'wallet',
           data: parseInt(this.data.total)
         })

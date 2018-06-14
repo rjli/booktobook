@@ -69,16 +69,22 @@ Page({
    * 处理服务器返回的打开借书单元的结果
    */
   processResult: function (data) {
-    wx.showToast({
-      title: data.message,
-      success: function () {
-        if (data.message.indexOf("成功") > 0) {
-          wx.redirectTo({
-            url: '../../borrow/borrow',
+    if (data.message.indexOf("成功") > 0) {
+      wx.navigateBack({
+        delta: 2,
+        success: function () {
+          wx.showToast({
+            title: data.message,
+            duration: 2000
           })
         }
-      }
-    })
+      })
+    } else {
+      wx.showToast({
+        title: data.message,
+      })
+    }
+
   },
   goToMoreComments: function (event) {
     wx.navigateTo({
