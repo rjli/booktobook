@@ -1,0 +1,10 @@
+<import src="review/review-template.wxml" />
+<import src="../empty/empty-template.wxml" />
+<view class="container">
+  <block wx:if="{{returnBookList.length >0}}" wx:for="{{returnBookList}}" wx:for-item="returnBook">
+    <template is="reviewTemplate" data="{{...returnBook}}" />
+  </block>
+  <block wx:if="{{returnBookList.length <=0}}">
+    <template is="emptyTemplate" data="{{message}}" />
+  </block>
+</view>

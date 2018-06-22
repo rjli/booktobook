@@ -1,0 +1,15 @@
+<template name="reviewTemplate">
+  <view class="review-container" catchtap='onReviewTap' data-borrow-record-id="{{borrowRecordId}}">
+    <view class="info">
+      <text class="info-title">书单名称: {{bookName}}</text>
+      <text class="info-title">会员名称: {{memberName}}</text>
+      <text class="info-title">归还时间: {{returntime}}</text>
+      <text class="info-title">门店信息: {{machineName}}</text>
+      <text class="info-title">位置信息: {{address}}</text>
+      <text class="info-title">柜门编号: {{bookcaseNum}}</text>
+    </view>
+    <view class="image">
+      <image src="{{bookImage}}"></image>
+    </view>
+  </view>
+</template>

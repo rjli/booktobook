@@ -1,49 +1,72 @@
 <import src="../empty/empty-template.wxml" />
 <view class='container'>
-  <block wx:if="{{borrowBook}}">
-    <view class='book'>
-      <view class="book-info">
-        <text class="bookname"> {{borrowBook.bookName}}</text>
-        <text>作者 {{borrowBook.author}}</text>
-        <text>出版社 {{borrowBook.press}}</text>
-        <text>出版时间 {{borrowBook.publishTime}}</text>
-        <text>页数 {{borrowBook.pages}}</text>
-        <text>定价 {{borrowBook.price}}</text>
-        <image src="{{borrowBook.image}}"></image>
-      </view>
+  <!-- <block wx:if="{{borrowBook}}"> -->
+  <view class='book'>
+    <view class="book-info">
+      <text class="bookname"> {{borrowBook.bookName}}</text>
+      <text>作者 {{borrowBook.author}}</text>
+      <text>出版社 {{borrowBook.press}}</text>
+      <text>出版时间 {{borrowBook.publishTime}}</text>
+      <text>页数 {{borrowBook.pages}}</text>
+      <text>定价 {{borrowBook.price}}</text>
+      <image src="{{borrowBook.image}}"></image>
     </view>
-    <view class="borrow-info">
-      <view>
-        <text>借阅时间 {{borrowBook.borrowTime}}</text>
-      </view>
-      <view>
-        <text>应还时间 {{borrowBook.shouldReturnTime}}</text>
-      </view>
-      <view>
-        <text>是否续借 {{borrowBook.isRenew}}</text>
-      </view>
-      <view>
-        <text>是否超期 {{borrowBook.isOverdue}}</text>
-      </view>
-      <view>
-        <text>超期天数 {{borrowBook.overDay}}</text>
-      </view>
-      <view>
-        <text>延期费用 {{borrowBook.delayMoney}}</text>
-      </view>
+  </view>
+  <view class="borrow-info">
+    <view wxif="{{borrowBook.memberName}}">
+      <text>会员名称 {{borrowBook.memberName}}</text>
+    </view>
+    <view>
+      <text>借阅时间 {{borrowBook.borrowTime}}</text>
+    </view>
+    <view wx:if="{{borrowBook.shouldReturnTime}}">
+      <text>应还时间 {{borrowBook.shouldReturnTime}}</text>
+    </view>
+    <view wx:if=" {{borrowBook.returnTime}}">
+      <text>归还时间 {{borrowBook.returnTime}}</text>
+    </view>
+    <view>
+      <text>是否续借 {{borrowBook.isRenew}}</text>
+    </view>
+    <view>
+      <text>是否超期 {{borrowBook.isOverdue}}</text>
+    </view>
+    <view>
+      <text>超期天数 {{borrowBook.overDay}}</text>
+    </view>
+    <view>
+      <text>延期费用 {{borrowBook.delayMoney}}</text>
+    </view>
+  </view>
+  <view wx:if="{{pageType == 'borrow'}}">
+    <view class="purchase" catchtap='onPurchaseTap'>
+      <text>感觉书还不错？可以直接点此购买哦</text>
     </view>
     <view class="operate-btn">
       <button class="btn-common" catchtap='onRenewTap' data-borrow-record-id="{{borrowBook.id}}" disabled="{{borrowBook.isRenew == '是'}}"> 续借 </button>
-      <button class="btn-common" catchtap='onReturnTap' data-borrow-record-id="{{borrowBook.id}}"> 归还</button>
-      <!-- <button class="btn-common"> 购买</button> -->
+      <button class="btn-common" catchtap='onReturnTap' data-borrow-record-id="{{borrowBook.id}}" disabled="{{borrowBook.isBuy == '是'}}"> 归还</button>
     </view>
-     <text class="problem" catchtap="onProblemTap"> 书籍损坏或者续借，归还中遇到问题，请点击进行问题上报</text> 
-    <view>
-      <text>温馨提示</text>
+    <text class="problem " catchtap="onProblemTap"> 书籍损坏或者续借、归还中遇到问题，请点次上报问题</text>
+    <view class="tips ">
+      <text>温馨提示:</text>
       <text>每次借阅只能续借一次，续借之后延长10天</text>
     </view>
-  </block>
-  <block wx:else>
-    <template is="emptyTemplate" data="{{message}}" />
-  </block>
+  </view>
+  <view class="hr"></view>
+  <view wx:if="{{pageType == 'return'}}">
+    <view class="review-title ">
+      <text>图书审核</text>
+    </view>
+    <view class="review-content ">
+      <textarea placeholder='填写对应的审核留言，主要检查图书是否破损，归还的图书是否正确。' bindblur='onBlurTap'></textarea>
+    </view>
+    <view class="operate-btn ">
+      <button class="btn-common" catchtap='onReviewBookTap' disabled='{{isReview}}'>确定</button>
+    </view>
+  </view>
+  <!-- </block> -->
+
+  <!-- <block wx:else>
+    <template is="emptyTemplate " data="{{message}} " />
+  </block> -->
 </view>

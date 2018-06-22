@@ -1,0 +1,5 @@
+ @import "review/review-template.wxss"; 
+ @import "../empty/empty-template.wxss"; 
+
+.container {
+}

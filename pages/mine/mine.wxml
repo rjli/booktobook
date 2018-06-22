@@ -10,44 +10,45 @@
           <image class="crown" src="/images/member/crown2.png"></image>
         </block>
       </view>
+      <text class="not_member" catchtap="onInfoTap" >完善个人信息</text>
       <block wx:if="{{userInfo.memberid == ''}}">
-        <text class="not_member" catchtap='moveToRegisterMember'>您还为成为会员</text>
+        <text class="not_member" catchtap='moveToRegisterMember'>您还未成为会员</text>
       </block>
     </view>
   </view>
-  <block wx:if="{{userInfo.memberid != ''}}">
-
+  <block wx:if="{{userInfo.memberid}}">
     <view class="tapbar" bindtap="movetoWallet">
       <text>我的钱包</text>
       <icon class="fa fa-angle-right mine-icon"></icon>
     </view>
-
     <view class="tapbar" bindtap="onBorrowTap">
       <text>正在借阅</text>
       <icon class="fa fa-angle-right"></icon>
     </view>
+    <view class="tapbar" bindtap="onHistoryTap">
+      <text>历史借阅</text>
+      <icon class="fa fa-angle-right"></icon>
+    </view>
+    <!-- <view class="tapbar" bindtap="movetoWallet">
+    <!-- <text>已购书籍</text> -->
+    <!-- </view> -->
+  </block>
+  <block wx:if="{{userInfo.binduserid}}">
     <view class="tapbar" bindtap="onShalveTap">
       <text>图书上架</text>
       <icon class="fa fa-angle-right"></icon>
     </view>
-    <!-- <view class="tapbar" bindtap="movetoWallet">
-      <!-- <view> -->
-    <!-- <icon class="fa fa-shopping-bag mr-20"></icon> -->
-    <!-- <text>已购书籍</text> -->
-    <!-- </view> -->
-    <!-- <icon class="fa fa-angle-right"></icon> -->
-    <!-- </view> -->
-
+    <view class="tapbar" bindtap="onReturnTap">
+      <text>还书审核</text>
+      <icon class="fa fa-angle-right"></icon>
+    </view>
   </block>
   <view class="tapbar" bindtap="movetoAbout">
     <text>关于娇书坊坊</text>
     <icon class="fa fa-angle-right mine-icon"></icon>
   </view>
   <view class="tapbar">
-    <!-- <view> -->
-    <!-- <icon class="fa fa-bell mr-20"></icon> -->
     <text>使用说明</text>
-    <!-- </view> -->
     <icon class="fa fa-angle-right mine-icon"></icon>
   </view>
 </view>

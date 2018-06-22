@@ -1,0 +1,22 @@
+.review-container {
+  padding: 0 40rpx;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-title {
+  padding: 10rpx 0;
+}
+
+.image image {
+  width: 200rpx;
+  height: 270rpx;
+  padding: 20rpx 0;
+}

@@ -13,7 +13,7 @@ Page({
       userInfo: userInfo
     })
     this.updateUserInfo();
-    
+
   },
   onShow: function (options) {
     if (app.globalData.isBack) {
@@ -29,20 +29,24 @@ Page({
   },
   processUpdateUserInfo: function (data) {
     if (data) {
-      this.data.userInfo.bindUserId = data.banduserid ? data.banduserid : "";
-      this.data.userInfo.memberid = data.memberid ? data.memberid : "";
-      this.data.userInfo.memberStartDate = data.memberStartDate ? data.memberStartDate : "";
-      this.data.userInfo.memberExpirationDate = data.memberExpirationDate ? data.memberExpirationDate : "";
-      wx.setStorageSync('userInfo', this.data.userInfo);
+      var tempUserInfo = this.data.userInfo;
+      tempUserInfo.binduserid = data.binduserid ? data.binduserid : "";
+      tempUserInfo.memberid = data.memberid ? data.memberid : "";
+      tempUserInfo.memberStartDate = data.memberStartDate ? data.memberStartDate : "";
+      tempUserInfo.memberExpirationDate = data.memberExpirationDate ? data.memberExpirationDate : "";
+      this.setData({
+        userInfo: tempUserInfo
+      })
+      wx.setStorageSync('userInfo', tempUserInfo);
     }
   },
   // 跳转至钱包
-  movetoWallet: util.throttle( function (event) {
+  movetoWallet: util.throttle(function (event) {
     wx.navigateTo({
       url: 'wallet/wallet'
     })
   }),
-  movetoAbout: util.throttle( function (event) {
+  movetoAbout: util.throttle(function (event) {
     wx.navigateTo({
       url: 'about/about'
     })
@@ -57,7 +61,15 @@ Page({
    */
   onBorrowTap: util.throttle(function (event) {
     wx.navigateTo({
-      url: '../borrow/borrow',
+      url: '../borrow/borrow?pageType=borrow',
+    })
+  }),
+  /**
+   * 已经归还的图书
+   */
+  onHistoryTap: util.throttle(function (event) {
+    wx.navigateTo({
+      url: '../borrows/borrows',
     })
   }),
   // 图书上架
@@ -71,6 +83,18 @@ Page({
         })
       }, fail: (res) => {
       }
+    })
+  }),
+  //跳转到还书审核页面
+  onReturnTap: util.throttle(function (event) {
+    wx.navigateTo({
+      url: '../reviews/reviews',
+    })
+  }),
+  onInfoTap: util.throttle(function (event) {
+    console.log("info  tap")
+    wx.navigateTo({
+      url: 'info/info',
     })
   })
 })

@@ -82,8 +82,16 @@ function throttle(fn, gapTime) {
     }
   }
 }
+//产生随机数函数
+function randNum(n) {
+  var rnd = "";
+  for (var i = 0; i < n; i++)
+    rnd += Math.floor(Math.random() * 10);
+  return rnd;
+}
 module.exports = {
   formatTime: formatTime,
   http: http,
-  throttle: throttle
+  throttle: throttle,
+  randNum: randNum
 }

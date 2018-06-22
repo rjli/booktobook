@@ -1,0 +1,27 @@
+<view class="container">
+  <!-- <view class="avatar">
+      <image src="{{userInfo.avatarUrl}}"></image>
+  </view> -->
+  <view class="info">
+    <text> 昵称</text>
+    <input placeholder='{{userInfo.nickName}}' disabled />
+  </view>
+  <view class="info">
+    <text> 所在地区</text>
+    <input placeholder='{{userInfo.country}}/{{userInfo.province}}/{{userInfo.city}}' disabled/>
+  </view>
+  <view class="info">
+    <text> 姓名</text>
+    <input placeholder='请填写您的姓名' bindblur='onNameBlurTap' value='{{userInfo.name}}' />
+  </view>
+  <!-- <view class="info">
+    <text> 微信号</text>
+    <input placeholder='请填写微信号' />
+  </view> -->
+  <view class="info">
+    <text> 手机号码</text>
+    <input type="number" placeholder='请填写手机号码'  bindblur='onPhoneBlurTap'  value='{{userInfo.phone}}'/>
+  </view>
+
+  <button class="btn-common" catchtap='updateUserInfo'>保存</button>
+</view>

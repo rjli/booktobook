@@ -1,0 +1,24 @@
+.container{
+  padding: 0 40rpx;
+}
+/* .avatar image {
+  position: absolute;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  right:50rpx;
+  top: 20rpx;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.2);
+} */
+.info{
+  padding: 10rpx 0;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 20rpx;
+}
+.info text{
+  color: #666;
+  font-size: 30rpx;
+}
+.info input{
+  font-size: 30rpx;
+}
