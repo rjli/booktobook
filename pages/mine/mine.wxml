@@ -29,6 +29,10 @@
       <text>历史借阅</text>
       <icon class="fa fa-angle-right"></icon>
     </view>
+     <view class="tapbar" bindtap="onWantTap">
+      <text>我想阅读</text>
+      <icon class="fa fa-angle-right"></icon>
+    </view>
     <!-- <view class="tapbar" bindtap="movetoWallet">
     <!-- <text>已购书籍</text> -->
     <!-- </view> -->

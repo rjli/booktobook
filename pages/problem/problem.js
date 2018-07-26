@@ -2,8 +2,8 @@ var app = getApp();
 var util = require("../../utils/util.js");
 Page({
   data: {
-    picUrls: [],// 故障图路径数组
-    actionText: "拍照/相册",// 选取图片提示
+    picUrls: [], // 故障图路径数组
+    actionText: "拍照/相册", // 选取图片提示
     content: "",
     remark: "",
     problemId: "",
@@ -11,12 +11,22 @@ Page({
     disabled: true,
     bookcaseId: ""
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     let problemType = options.problemType;
     let issues = [];
-    if (problemType == 'base') {
-      issues = [
-        {
+    if (problemType == 'want'){
+      wx.setNavigationBarTitle({
+        title: '我想阅读'
+      })
+      this.setData({
+        disabled:false
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title: '故障保修'
+      })
+      if (problemType == 'base') {
+        issues = [{
           checked: false,
           value: "二维码不对"
         },
@@ -32,10 +42,9 @@ Page({
           checked: false,
           value: "其他故障"
         }
-      ]
-    } else if (problemType == 'book') {
-      issues = [
-        {
+        ]
+      } else if (problemType == 'book') {
+        issues = [{
           checked: false,
           value: "书籍不对应"
         },
@@ -55,14 +64,20 @@ Page({
           checked: false,
           value: "其他问题"
         }
-      ]
-      this.setData({ borrowRecordId: options.borrowRecordId })
+        ]
+        this.setData({
+          borrowRecordId: options.borrowRecordId
+        })
+      }
+      this.setData({
+        issues: issues
+      })
     }
     this.setData({
-      issues: issues
+      problemType: problemType
     })
   },
-  onQrcodeTap: function (event) {
+  onQrcodeTap: function(event) {
     wx.scanCode({
       scanType: "qrCode",
       success: (res) => {
@@ -72,11 +87,11 @@ Page({
         })
         wx.hideLoading();
 
-      }, fail: (res) => {
-      }
+      },
+      fail: (res) => {}
     })
   },
-  radioboxChange: function (event) {
+  radioboxChange: function(event) {
     let value = event.detail.value;
     var issues = this.data.issues;
     for (let item of issues) {
@@ -92,13 +107,13 @@ Page({
       disabled: false
     })
   },
-  numberChange: function (event) {
+  numberChange: function(event) {
     this.setData({
       bookcaseId: event.detail.value
     })
   },
   //拍照或选择相册
-  bindCamera: function () {
+  bindCamera: function() {
     wx.chooseImage({
       count: 4,
       sizeType: ['original', 'compressed'],
@@ -114,7 +129,7 @@ Page({
     })
   },
   // 删除选择的故障车周围环境图
-  delPic: function (e) {
+  delPic: function(e) {
     let index = e.target.dataset.index;
     let _picUrls = this.data.picUrls;
     _picUrls.splice(index, 1);
@@ -122,18 +137,25 @@ Page({
       picUrls: _picUrls
     })
   },
-  onProblemBlur: function (event) {
-    console.log(event.detail.value)
+  onProblemBlur: function(event) {
     this.setData({
       remark: event.detail.value
     })
   },
   //问题上报
-  onProblemTap: function (event) {
+  onProblemTap: function(event) {
+    if(this.data.problemType == 'want'){
+      if (!this.data.remark){
+         wx.showToast({
+           title: '书籍描述不能为空'
+         })
+         return;
+      }
+    }
     let url = app.globalData.zbtcBase + "/DPlatform/btb/pro/fpro0020_createTheProblem.st"
     let data = {
       "userId": wx.getStorageSync('userInfo').userid,
-      "type": "故障保修",
+      "type": this.data.problemType=="want"?"我想阅读":"故障保修",
       "content": this.data.content,
       "machineId": this.data.machineId ? this.data.machineId : "",
       "remark": this.data.remark,
@@ -142,7 +164,7 @@ Page({
     }
     util.http(url, data, "POST", this.processProblemData, false);
   },
-  processProblemData: function (data) {
+  processProblemData: function(data) {
     let length = this.data.picUrls.length; //总共个数
     let problemId = data.id;
     this.setData({
@@ -165,8 +187,7 @@ Page({
             duration: 2000
           })
         }
-      }
-      );
+      });
     }
 
   },
@@ -196,8 +217,7 @@ Page({
             title: '操作成功',
           })
           wx.hideLoading();
-        }
-        else {  //递归调用uploadFiles函数
+        } else { //递归调用uploadFiles函数
           this.uploadFiles(filePaths, successUp, failUp, i, length);
         }
       },

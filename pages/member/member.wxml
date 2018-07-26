@@ -22,6 +22,30 @@
   </view>
   <view class="content">
     <view class="content-title">
+      <text>押金用户</text>
+    </view>
+    <view class="content-detail">
+      <view>
+        <icon class="fa fa-check-square-o" />
+        <text class="detail">借书期间一天0.5元</text>
+      </view>
+      <view>
+        <icon class="fa fa-check-square-o" />
+        <text class="detail">不定时现金红包</text>
+      </view>
+      <view>
+        <icon class="fa fa-check-square-o" />
+        <text class="detail">专项购书优惠</text>
+      </view>
+      <view class="hr"></view>
+      <view class="memberfee">
+        <text class="fee-text">押金/年</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open">199元</text>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="content-title">
       <text>会员专享</text>
     </view>
     <view class="content-detail">
@@ -40,10 +64,9 @@
       <view class="hr"></view>
       <view class="memberfee">
         <text class="fee-text">会员/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open">99元</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open">199元</text>
       </view>
     </view>
-
   </view>
 </view>
 

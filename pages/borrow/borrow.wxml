@@ -1,6 +1,6 @@
 <import src="../empty/empty-template.wxml" />
 <view class='container'>
-  <!-- <block wx:if="{{borrowBook}}"> -->
+   <block wx:if="{{borrowBook}}"> 
   <view class='book'>
     <view class="book-info">
       <text class="bookname"> {{borrowBook.bookName}}</text>
@@ -64,9 +64,9 @@
       <button class="btn-common" catchtap='onReviewBookTap' disabled='{{isReview}}'>确定</button>
     </view>
   </view>
-  <!-- </block> -->
+   </block> 
 
-  <!-- <block wx:else>
-    <template is="emptyTemplate " data="{{message}} " />
-  </block> -->
+   <block wx:else>
+    <template is="emptyTemplate" data="{{message}}" />
+  </block> 
 </view>

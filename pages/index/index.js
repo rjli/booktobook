@@ -322,7 +322,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '../borrow/borrow',
+      url: '../borrow/borrow?pageType=borrow',
     })
   }),
 

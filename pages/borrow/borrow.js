@@ -34,7 +34,6 @@ Page({
     }
 
   },
-
   processBorrowData: function(data) {
     console.log(data);
     if (this.data.pageType == "borrow") {

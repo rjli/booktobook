@@ -96,5 +96,10 @@ Page({
     wx.navigateTo({
       url: 'info/info',
     })
+  }),
+  onWantTap:util.throttle(function(event){
+    wx.navigateTo({
+      url: '../problem/problem?problemType=want',
+    })
   })
 })
