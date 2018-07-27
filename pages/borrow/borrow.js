@@ -19,9 +19,11 @@ Page({
         redpacket: wx.getStorageSync('redpacket') ? wx.getStorageSync('redpacket') : 0,
         userInfo: wx.getStorageSync('userInfo')
       })
+      console.log(this.data.userInfo);
+      console.log("memberId:" + this.data.userInfo.memberid);
       var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_onGoingBorrowingRecord.st"
       var data = {
-        "memberId": this.data.userInfo.memberId
+        "memberId": this.data.userInfo.memberid
       }
       util.http(url, data, "GET", this.processBorrowData, false);
     } else if (pageType == 'return') {

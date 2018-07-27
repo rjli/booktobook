@@ -9,8 +9,10 @@ Page({
   onLoad: function (options) {
    
     var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_historyBorrowingRecord.st"
+    var memberId = wx.getStorageSync('userInfo').memberid;
+    console.log("memberId:" + memberId)
     var data = {
-      "memberId": wx.getUserInfo.memberid
+      "memberId": memberId
     }
     util.http(url, data, "GET", this.processHisToryBorrowRecord, false);
   },
@@ -25,7 +27,13 @@ Page({
       })
     }
     
-  }
+  },
+  onBorrowTap: util.throttle(function(event){
+    var bookListId = event.currentTarget.dataset.bookListId;
+     wx.navigateTo({
+       url: '/pages/booklists/booklist-detail/booklist-detail?bookListId=' + bookListId +'&btnType=simple'
+     })
+  })
 
 
 })

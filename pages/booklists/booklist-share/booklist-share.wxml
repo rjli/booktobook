@@ -1,0 +1,37 @@
+<!--pages/booklists/booklist-share/booklist-share.wxml-->
+<view class="container">
+  <!-- <view class="header-title">
+    <view class="header-text">2018|七月</view>
+    <view class="head-share">
+      <button bindtap="onShareTap" plain='true' open-type="share">
+        <icon class="fa fa-share-square-o share-icon"></icon>
+      </button>
+    </view>
+  </view>
+  <view class='header'>
+    <image class="head-img" src="http://192.168.100.25:90/DPlatform/files/btb/bookList/6ace680c26cf42eea9c8742a9d1e062a.jpg" mode="aspectFill" />
+    <view class="head-img-hover">
+      <view class="head-title">
+        <text class="main-title">《百年孤独》</text>
+
+      </view>
+      <view>
+      </view>
+    </view>
+    <image class="movie-img" src="http://192.168.100.25:90/DPlatform/files/btb/bookList/6ace680c26cf42eea9c8742a9d1e062a.jpg" data-src="{{book.image}}" catchtap="viewBookPostImg" />
+    <view class="info">
+      <text class="white">书</text>
+      <text class="gray">单。</text>
+    </view>
+  </view>
+
+
+  <view class="classic">
+    <text>我们终此一生，就是要摆脱他人的期待，找到真正的自己。</text>
+  </view> -->
+  <image src="{{shareImage}}" class="share-image"></image>
+  <canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />
+
+  <button bindtap="eventDraw">绘制</button>
+  <button bindtap="eventSave">保存到本地</button>
+</view>

@@ -7,13 +7,17 @@ Page({
   onLoad: function(options) {
     console.log(options);
     this.setData({
-      machineId: options.machineId,
-      bookCaseId: options.bookCaseId,
-      bookId: options.bookId,
-      bookCaseNumber: options.bookCaseNumber,
       bookListId: options.bookListId,
       btnType: options.btnType
     });
+    if (options.btnType == 'borrow'){
+      this.setData({
+        machineId: options.machineId,
+        bookCaseId: options.bookCaseId,
+        bookCaseNumber: options.bookCaseNumber,
+        bookId: options.bookId
+      });
+    }
     this.requestBooklistDetail();
   },
   requestBooklistDetail: function() {
@@ -102,45 +106,29 @@ Page({
       url: '../create-comment/create-comment?boolistId=' + this.data.book.id
     })
   },
-  onShareTap:function(){
-    var itemList = [
-      "分享给微信好友",
-      "分享到朋友圈"
-    ];
-    let that = this;
-    wx.showActionSheet({
-      itemList: itemList,
-      itemColor: "#405f80",
-      success: function (res) {
-        // res.cancel 用户是不是点击了取消按钮
-        // res.tapIndex 数组元素的序号，从0开始
-        switch(res.tapIndex){
-          case 0: that.onShareAppMessage();
-                 break;
-          case 1: break;
-        }
-      }
-    })
-  },
   /*
    * 右上角转发功能 
    * */
   onShareAppMessage: function(res) {
     var that = this;
     console.log(res);
-    // if (res.from === 'menu') {
+    if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
-    // }
+    }
+
     return {
-      title: that.data.book.title+  '一句话，一辈子',
-      path: '/pages/booklists/booklist-detail?machineId=' + that.data.machineId + '&bookCaseId=' + that.data.bookCaseId + '&bookId=' + that.data.bookId + '&bookCaseNumber=' + that.data.bookCaseNumber + '&bookListId=' + that.data.bookListId + '&btnType=' + that.data.btnType,
+      title: that.data.book.title,
+      path: '/pages/booklists/booklist-detail/booklist-detail?machineId=' + that.data.machineId + '&bookCaseId=' + that.data.bookCaseId + '&bookId=' + that.data.bookId + '&bookCaseNumber=' + that.data.bookCaseNumber + '&bookListId=' + that.data.bookListId + '&btnType=' + that.data.btnType,
       // imageUrl: that.data.book.image,
       success: function(res) {
         // 转发成功
+        console.log(res);
       },
       fail: function(res) {
         // 转发失败
+        console.log(res);
+
       }
     }
   }

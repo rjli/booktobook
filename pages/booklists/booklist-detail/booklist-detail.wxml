@@ -5,18 +5,25 @@
     <view class='header'>
       <image class="head-img" src="{{book.image}}" mode="aspectFill" />
       <view class="head-img-hover">
-        <view>
+        <view class="head-title">
           <text class="main-title">{{book.title}}</text>
+          <view class="head-share" wx:if="{{btnType == 'simple'}}">
+            <button bindtap="onShareTap" plain='true' open-type="share">
+              <icon class="fa fa-share-square-o share-icon"></icon>
+            </button>
+          </view>
         </view>
-        <button class="head-share" bindtap="onShareTap" open-type="share">
-          <icon class="fa fa-share-square-o share-icon"></icon>
-        </button>
+        <view>
+            <!-- <text class="sub-title">{{book.classicStatement}}</text> -->
+        </view>
       </view>
       <image class="movie-img" src="{{book.image}}" data-src="{{book.image}}" catchtap="viewBookPostImg" />
     </view>
     <view class="summary">
       <view class="original-title">
         <text>{{book.title}}</text>
+      </view>
+      <view>
       </view>
       <view class="flex-row">
         <text class="mark">作者</text>

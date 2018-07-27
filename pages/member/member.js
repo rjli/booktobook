@@ -20,7 +20,11 @@ Page({
   },
   powerDrawer: function (event) {
     var currentStatu = event.currentTarget.dataset.statu;
-    this.controlPower(currentStatu)
+    var memberType = event.currentTarget.dataset.memberType;
+    this.setData({
+      memberType: memberType
+    })
+    this.controlPower(currentStatu )
   },
   controlPower: function (currentStatu) {
     /* 动画部分 */
@@ -114,7 +118,8 @@ Page({
     var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_registerMember.st"
     var data = {
       "userId": this.data.userInfo.userid,
-      "orderNum": outTradeNo
+      "orderNum": outTradeNo,
+      "memberType": this.data.memberType
     }
     util.http(url, data, "POST", this.processRegisterMember, false)
   },

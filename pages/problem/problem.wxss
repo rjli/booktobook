@@ -74,7 +74,7 @@
 .content-want textarea{
  padding: 20rpx;
   margin: 20rpx 0;
-  width: 100%;
+  width: 95%;
   height: 300rpx;
   /* border: 1px solid grey; */
   border-radius: 10rpx;

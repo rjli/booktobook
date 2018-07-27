@@ -40,7 +40,7 @@
       <view class="hr"></view>
       <view class="memberfee">
         <text class="fee-text">押金/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open">199元</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='depositUser'>199元</text>
       </view>
     </view>
   </view>
@@ -64,7 +64,7 @@
       <view class="hr"></view>
       <view class="memberfee">
         <text class="fee-text">会员/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open">199元</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='ordinaryMmember'>199元</text>
       </view>
     </view>
   </view>

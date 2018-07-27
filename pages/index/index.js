@@ -366,5 +366,28 @@ Page({
   // 定位函数，移动位置到地图中心
   movetoPosition: function () {
     this.mapCtx.moveToLocation();
+  },
+  /*
+  * 右上角转发功能 
+  * */
+  onShareAppMessage: function (res) {
+    var that = this;
+    console.log(res);
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      path: '/pages/index/index',
+      success: function (res) {
+        // 转发成功
+        console.log(res);
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log(res);
+
+      }
+    }
   }
 })
