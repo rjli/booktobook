@@ -59,6 +59,7 @@ function http(url, data, type, callBack, isNavBarLoading) {
       }
     },
     fail: function (error) {
+      console.log(error);
       wx.showToast({
         title: '网络错误',
       })

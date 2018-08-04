@@ -120,7 +120,7 @@ Page({
     return {
       title: that.data.book.title,
       path: '/pages/booklists/booklist-detail/booklist-detail?machineId=' + that.data.machineId + '&bookCaseId=' + that.data.bookCaseId + '&bookId=' + that.data.bookId + '&bookCaseNumber=' + that.data.bookCaseNumber + '&bookListId=' + that.data.bookListId + '&btnType=' + that.data.btnType,
-      // imageUrl: that.data.book.image,
+      // imageUrl: "/images/bookinfo.png",
       success: function(res) {
         // 转发成功
         console.log(res);

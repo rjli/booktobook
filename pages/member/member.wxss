@@ -179,6 +179,22 @@
   color: #fff;
 }
 
+.deposit{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+ 
+}
+
+.deposit button{
+   color: red !important;
+}
+
+.hide{
+  display: none;
+}
 
 Page{
   background-color: #fff;

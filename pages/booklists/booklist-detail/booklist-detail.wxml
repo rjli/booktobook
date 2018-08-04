@@ -13,8 +13,8 @@
             </button>
           </view>
         </view>
-        <view>
-            <!-- <text class="sub-title">{{book.classicStatement}}</text> -->
+        <view class="sub-title">
+            <text >{{book.classicStatement}}</text>
         </view>
       </view>
       <image class="movie-img" src="{{book.image}}" data-src="{{book.image}}" catchtap="viewBookPostImg" />

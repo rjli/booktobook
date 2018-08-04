@@ -8,19 +8,23 @@
     <view class="user-info">
       <view class="name">
         <text class="membername">{{userInfo.nickName}}</text>
-        <block wx:if="{{userInfo.memberid}}">
+        <block wx:if="{{userInfo.memberid && userInfo.memberType != '押金用户'}}">
           <image class="crown" src="/images/member/crown2.png"></image>
         </block>
       </view>
       <block wx:if="{{userInfo.memberid == ''}}">
         <text class="not_member" catchtap='moveToRegisterMember'>您还未成为会员{{userInfo.memberid}}</text>
       </block>
-      <block wx:if="{{userInfo.memberid}}">
+      <block wx:if="{{userInfo.memberid && userInfo.memberType == '押金用户'}}">
+        <text class="not_member" catchtap='moveToRegisterMember'>您已是押金用户</text>
+      </block>
+
+      <block wx:if="{{userInfo.memberid && userInfo.memberType != '押金用户'}}">
         <text class="time-info">会员到期日：{{userInfo.memberExpirationDate}}</text>
       </block>
     </view>
   </view>
-  <view class="content">
+  <view class="content  {{depositDisabled? 'hide'  :''}}">
     <view class="content-title">
       <text>押金用户</text>
     </view>
@@ -40,7 +44,7 @@
       <view class="hr"></view>
       <view class="memberfee">
         <text class="fee-text">押金/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='depositUser'>199元</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='押金用户' >199元</text>
       </view>
     </view>
   </view>
@@ -64,12 +68,16 @@
       <view class="hr"></view>
       <view class="memberfee">
         <text class="fee-text">会员/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='ordinaryMmember'>199元</text>
+        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='普通会员'  >199元</text>
       </view>
     </view>
   </view>
 </view>
-
+<block wx:if="{{userInfo.memberType == '押金用户'}}">
+  <view class="deposit">
+    <button catchtap='onDepositTap'>退还押金</button>
+  </view>
+</block>
 <!--mask-->
 <view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
 <!--content-->
@@ -85,10 +93,12 @@
   <view class='hr-10'></view>
   <view class="drawer_content">
     <text>●  会员有效期内，您可以无限量借阅书籍</text>
+    <text>●  押金用户在借阅期间一天0.5元</text>
+    <text>●  会员在借阅期间免费借书</text>
     <text>●  每次只能借阅一本图书，归还图书后才能继续借阅</text>
     <text>●  会员过期后，您将不在可以借阅书籍</text>
     <text>●  会员为虚拟产品，已经付费概不退款，敬请谅解</text>
   </view>
   <view class='hr'></view>
-  <view class="btn_ok" bindtap="doUndifiedOrder">购买 99元/年</view>
+  <view class="btn_ok" bindtap="doUndifiedOrder">购买 {{memberfee}}/年</view>
 </view>

@@ -6,27 +6,43 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModalStatus: false
+    showModalStatus: false,
+    depositDisabled:false,
+    total:"199"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var userInfo = wx.getStorageSync("userInfo");
+    console.log(userInfo);
+    var depositDisabled = this.data.depositDisabled;
+    if(userInfo.memberType == '押金用户'){
+      depositDisabled = true;
+    }
     this.setData({
-      userInfo: userInfo
+      userInfo: userInfo,
+      depositDisabled: depositDisabled
     })
   },
-  powerDrawer: function (event) {
+  powerDrawer: function(event) {
     var currentStatu = event.currentTarget.dataset.statu;
     var memberType = event.currentTarget.dataset.memberType;
+    console.log("memberType:" + memberType);
     this.setData({
       memberType: memberType
     })
-    this.controlPower(currentStatu )
+    if (this.data.userInfo.memberType == '押金用户') {
+      wx.showToast({
+        title: '您已缴纳押金',
+      })
+    } else {
+      this.controlPower(currentStatu);
+    }
+
   },
-  controlPower: function (currentStatu) {
+  controlPower: function(currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
@@ -44,7 +60,7 @@ Page({
       animationData: animation.export()
     })
     // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
+    setTimeout(function() {
       // 执行第二组动画 
       animation.opacity(1).rotateX(0).step();
       // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
@@ -53,23 +69,19 @@ Page({
       })
       //关闭 
       if (currentStatu == "close") {
-        this.setData(
-          {
-            showModalStatus: false
-          }
-        );
+        this.setData({
+          showModalStatus: false
+        });
       }
     }.bind(this), 200)
     // 显示 
     if (currentStatu == "open") {
-      this.setData(
-        {
-          showModalStatus: true
-        }
-      );
+      this.setData({
+        showModalStatus: true
+      });
     }
   },
-  doUndifiedOrder: function () {
+  doUndifiedOrder: function() {
     console.log(this.data.userInfo.openid);
     var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0020_goToUnifiedOrder.st"
     var data = {
@@ -80,38 +92,37 @@ Page({
     util.http(url, data, "POST", this.processUndifiedOrder, false);
 
   },
-  processUndifiedOrder: function (data) {
+  processUndifiedOrder: function(data) {
     console.log(data);
     if (data.message.indexOf('成功') > 0) {
-      wx.requestPayment(
-        {
-          'timeStamp': data.timeStamp,
-          'nonceStr': data.nonceStr,
-          'package': data.package,
-          'signType': data.signType,
-          'paySign': data.paySign,
-          'success': res => {
-            console.log(res);
-            wx.showToast({
-              title: '操作成功',
-            })
-            this.registerMember(data.outTradeNo);
-          },
-          'fail': res => {
-            console.log(res);
-            wx.showToast({
-              title: res.errMsg,
-            })
-          },
-          'complete': res => { }
-        })
+      wx.requestPayment({
+        'timeStamp': data.timeStamp,
+        'nonceStr': data.nonceStr,
+        'package': data.package,
+        'signType': data.signType,
+        'paySign': data.paySign,
+        'success': res => {
+          console.log(res);
+          wx.showToast({
+            title: '操作成功',
+          })
+          this.registerMember(data.outTradeNo);
+        },
+        'fail': res => {
+          console.log(res);
+          wx.showToast({
+            title: res.errMsg,
+          })
+        },
+        'complete': res => {}
+      })
     } else {
       wx.showToast({
         title: '支付请求失败，请稍候在试',
       })
     }
   },
-  registerMember: function (outTradeNo) {
+  registerMember: function(outTradeNo) {
     wx.showToast({
       title: '开始更新会员信息',
     })
@@ -119,11 +130,12 @@ Page({
     var data = {
       "userId": this.data.userInfo.userid,
       "orderNum": outTradeNo,
-      "memberType": this.data.memberType
+      "memberType": this.data.memberType,
+      "total":this.data.total
     }
     util.http(url, data, "POST", this.processRegisterMember, false)
   },
-  processRegisterMember: function (data) {
+  processRegisterMember: function(data) {
     var userInfo = this.data.userInfo;
     userInfo.memberid = data.memberid;
     userInfo.memberExpirationDate = data.memberExpirationDate;
@@ -137,5 +149,8 @@ Page({
       title: '会员申请成功',
     })
     app.globalData.isBack = true;
+  },
+  onDepositTap:function(event){
+     console.log("退押金");
   }
 })

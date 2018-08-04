@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/booklists/booklist-share/booklist-share",
-    "pages/index/index",
+      "pages/index/index",
     "pages/mine/mine",
-    "pages/problem/problem",
     "pages/member/member",
+    "pages/booklists/booklist-share/booklist-share",
+    "pages/problem/problem",
     "pages/reviews/reviews",
     "pages/mine/info/info",
     "pages/borrow/borrow",

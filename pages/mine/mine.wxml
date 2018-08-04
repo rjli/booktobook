@@ -10,9 +10,11 @@
           <image class="crown" src="/images/member/crown2.png"></image>
         </block>
       </view>
-      <text class="not_member" catchtap="onInfoTap" >完善个人信息</text>
       <block wx:if="{{userInfo.memberid == ''}}">
         <text class="not_member" catchtap='moveToRegisterMember'>您还未成为会员</text>
+      </block>
+      <block  wx:if="{{userInfo.memberid}}">
+      <text class="not_member" catchtap="onInfoTap" >完善个人信息</text>
       </block>
     </view>
   </view>
