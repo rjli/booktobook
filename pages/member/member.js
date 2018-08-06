@@ -151,6 +151,16 @@ Page({
     app.globalData.isBack = true;
   },
   onDepositTap:function(event){
-     console.log("退押金");
+    var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0020_refundMemberFee.st"
+    var data = {
+      "memberId": this.data.userInfo.memberid
+    }
+    util.http(url, data, "POST", this.processDeposit, false)
+  },
+  processDeposit:function(data){
+    var message = this.data.message;
+    wx.showToast({
+      title: message,
+    })
   }
 })

@@ -29,6 +29,7 @@ Page({
   },
   processUpdateUserInfo: function(data) {
     if (data) {
+      console.log(data);
       var tempUserInfo = this.data.userInfo;
       tempUserInfo.binduserid = data.binduserid ? data.binduserid : "";
       tempUserInfo.memberid = data.memberid ? data.memberid : "";
