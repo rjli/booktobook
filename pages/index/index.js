@@ -217,7 +217,7 @@ Page({
             "latitude": res.latitude,
             "longitude": res.longitude
           }
-         // this.findMachines(data, this.processMachinesData);
+         this.findMachines(data, this.processMachinesData);
         }
       });
     }

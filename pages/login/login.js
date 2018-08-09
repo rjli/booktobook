@@ -12,11 +12,13 @@ Page({
         this.setData({
           tempUser: event.detail.userInfo
         });
+        console.log(res);
         var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0010_createUserFromMiniProgram.st";
         var data = {
           "code": res.code,
           "userInfo": JSON.stringify(event.detail.userInfo)
         }
+        console.log(event.detail.userInfo);
         util.http(url, data, "POST", this.processLogin, false);
       },
       fail: res=>{
@@ -28,6 +30,7 @@ Page({
 
   },
   processLogin: function (data) {
+    console.log(data)
     var userInfo = this.data.tempUser;
     userInfo.openid = data.openid;
     userInfo.userid = data.userid;

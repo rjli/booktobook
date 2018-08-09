@@ -81,6 +81,14 @@ Page({
       });
     }
   },
+  getMemberInfo: function () {
+    console.log(this.data.userInfo.openid);
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_memberMessage.st"
+    util.http(url, {}, "POST", this.processMemberInfo, false);
+  },
+  processMemberInfo:function(data){
+      console.log(data);
+  },
   doUndifiedOrder: function() {
     console.log(this.data.userInfo.openid);
     var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0020_goToUnifiedOrder.st"
@@ -136,11 +144,18 @@ Page({
     util.http(url, data, "POST", this.processRegisterMember, false)
   },
   processRegisterMember: function(data) {
+    console.log(data);
     var userInfo = this.data.userInfo;
     userInfo.memberid = data.memberid;
     userInfo.memberExpirationDate = data.memberExpirationDate;
     userInfo.memberStartTime = data.memberStartTime;
+    userInfo.memberType = data.memberType;
     wx.setStorageSync("userInfo", userInfo);
+    if (userInfo.memberType == '押金用户') {
+      this.setData({
+        depositDisabled : true
+      })
+    }
     this.setData({
       userInfo: userInfo,
     })
@@ -158,7 +173,18 @@ Page({
     util.http(url, data, "POST", this.processDeposit, false)
   },
   processDeposit:function(data){
-    var message = this.data.message;
+    console.log(data);
+    var message = data.message;
+    var userInfo = this.data.userInfo;
+    userInfo.memberid = "";
+    userInfo.memberExpirationDate = "";
+    userInfo.memberStartTime ="";
+    userInfo.memberType = "";
+    wx.setStorageSync("userInfo", userInfo);
+    this.setData({
+      userInfo: userInfo,
+    })
+    app.globalData.isBack = true;
     wx.showToast({
       title: message,
     })
