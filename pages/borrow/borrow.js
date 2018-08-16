@@ -266,5 +266,6 @@ Page({
     this.setData({
       isReview:true
     })
+    app.globalData.isBack = true;
   }
 })

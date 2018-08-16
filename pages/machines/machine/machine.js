@@ -41,6 +41,7 @@ Page({
     util.http(url, data, "GET", this.processMachineData);
   },
   processMachineData: function (data) {
+    console.log(data);
     var optiontype = this.data.optiontype;
     this.setData({
       machine: data

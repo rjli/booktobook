@@ -2,7 +2,8 @@ var app = getApp();
 var util = require("../../../utils/util.js");
 Page({
   data: {
-    book: ""
+    book: "",
+    previewUserId: ""
   },
   onLoad: function(options) {
     console.log(options);
@@ -10,15 +11,25 @@ Page({
       bookListId: options.bookListId,
       btnType: options.btnType
     });
-    if (options.btnType == 'borrow'){
+    if (options.btnType == 'borrow') {
       this.setData({
         machineId: options.machineId,
         bookCaseId: options.bookCaseId,
         bookCaseNumber: options.bookCaseNumber,
         bookId: options.bookId
       });
+      // 获取书籍状态
+      this.getBookState();
     }
     this.requestBooklistDetail();
+  },
+  onUnload: function() {
+    console.log(!!this.data.previewUserId)
+    console.log((this.data.previewUserId == wx.getStorageSync('userInfo').userid) || !!this.data.previewUserId);
+    if ((this.data.previewUserId == wx.getStorageSync('userInfo').userid) || !this.data.previewUserId) {
+      this.updateBookState("");
+    }
+    app.globalData.isBack = true;
   },
   requestBooklistDetail: function() {
     var url = app.globalData.zbtcBase + "/DPlatform/btb/bkl/fbkl0040_findBookDetailById.st"
@@ -43,15 +54,21 @@ Page({
    * 请求服务器，实现结束的打开柜门的操作
    */
   onBorrowTap: function(event) {
-    var data = {
-      machineId: this.data.machineId,
-      bookcaseId: this.data.bookCaseId,
-      bookListId: this.data.book.id,
-      bookId: this.data.bookId,
-      memberId: wx.getStorageSync('userInfo').memberid
+    console.log("借阅")
+    var flag = this.getBookState();
+    console.log("flag:" + flag)
+    if (flag) {
+      var data = {
+        machineId: this.data.machineId,
+        bookcaseId: this.data.bookCaseId,
+        bookListId: this.data.book.id,
+        bookId: this.data.bookId,
+        memberId: wx.getStorageSync('userInfo').memberid
+      }
+      var url = app.globalData.zbtcBase + "/DPlatform//btb/bro/fbro0020_createTheBorrowingRecord.st";
+      util.http(url, data, "POST", this.processResult, false);
     }
-    var url = app.globalData.zbtcBase + "/DPlatform//btb/bro/fbro0020_createTheBorrowingRecord.st";
-    util.http(url, data, "POST", this.processResult, false);
+
   },
   /**
    * 预览图片信息
@@ -105,6 +122,61 @@ Page({
     wx.navigateTo({
       url: '../create-comment/create-comment?boolistId=' + this.data.book.id
     })
+  },
+  /**
+   * 获取书籍状态
+   */
+  getBookState: function(event) {
+    var data = {
+      bookId: this.data.bookId,
+    }
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_getTheBookCaseMapById.st";
+    util.http(url, data, "POST", this.processBookStateResult, false);
+  },
+  processBookStateResult: function(data) {
+    console.log(data);
+    var flag = false;
+    var userid = wx.getStorageSync('userInfo').userid;
+    this.setData({
+      previewUserId: data.previewUserId
+    })
+    if (!!data.previewState && data.previewUserId != userid) {
+      console.log("不合法")
+      wx.navigateBack({
+        delta: 1,
+        success: function() {
+          wx.showToast({
+            title: '亲，来晚一步哦',
+            duration: 3000
+          })
+        }
+      })
+    } else {
+      console.log("更新状态")
+      this.updateBookState("在用");
+
+      flag = true;
+    }
+    return flag;
+  },
+  /**
+   * 获取书籍状态
+   */
+  updateBookState: function(previewState) {
+    console.log("previewState:" + previewState)
+    console.log(!!previewState ? wx.getStorageSync('userInfo').userid : "");
+    var data = {
+      bookId: this.data.bookId,
+      previewState: previewState,
+      previewUserId: !!previewState ? wx.getStorageSync('userInfo').userid : ""
+    }
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_updateTheBookCaseMap.st";
+    util.http(url, data, "POST", this.processUpdateBookStateResult, false);
+  },
+  processUpdateBookStateResult: function(data) {
+    console.log(data);
+    // if(data.message.indexOf("成功")>-1){
+    // }
   },
   /*
    * 右上角转发功能 

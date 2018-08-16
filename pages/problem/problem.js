@@ -152,6 +152,14 @@ Page({
          return;
       }
     }
+    if (this.data.problemType == 'base'){
+      if (!this.data.machineId) {
+        wx.showToast({
+          title: '请扫描二维码'
+        })
+        return;
+      }
+    }
     let url = app.globalData.zbtcBase + "/DPlatform/btb/pro/fpro0020_createTheProblem.st"
     let data = {
       "userId": wx.getStorageSync('userInfo').userid,

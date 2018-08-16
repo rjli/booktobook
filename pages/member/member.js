@@ -7,18 +7,19 @@ Page({
    */
   data: {
     showModalStatus: false,
-    depositDisabled:false,
-    total:"199"
+    depositDisabled: false,
+    memberTypeList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getMemberInfo();
     var userInfo = wx.getStorageSync("userInfo");
     console.log(userInfo);
     var depositDisabled = this.data.depositDisabled;
-    if(userInfo.memberType == '押金用户'){
+    if (userInfo.memberType == '押金用户') {
       depositDisabled = true;
     }
     this.setData({
@@ -81,13 +82,17 @@ Page({
       });
     }
   },
-  getMemberInfo: function () {
-    console.log(this.data.userInfo.openid);
+  getMemberInfo: function() {
     var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_memberMessage.st"
     util.http(url, {}, "POST", this.processMemberInfo, false);
   },
-  processMemberInfo:function(data){
-      console.log(data);
+  processMemberInfo: function(data) {
+    console.log(data);
+    this.setData({
+      depositUser: data[1],
+      member: data[0],
+      memberTypeList: data
+    })
   },
   doUndifiedOrder: function() {
     console.log(this.data.userInfo.openid);
@@ -139,7 +144,7 @@ Page({
       "userId": this.data.userInfo.userid,
       "orderNum": outTradeNo,
       "memberType": this.data.memberType,
-      "total":this.data.total
+      "total": this.data.total
     }
     util.http(url, data, "POST", this.processRegisterMember, false)
   },
@@ -153,7 +158,7 @@ Page({
     wx.setStorageSync("userInfo", userInfo);
     if (userInfo.memberType == '押金用户') {
       this.setData({
-        depositDisabled : true
+        depositDisabled: true
       })
     }
     this.setData({
@@ -165,20 +170,20 @@ Page({
     })
     app.globalData.isBack = true;
   },
-  onDepositTap:function(event){
+  onDepositTap: function(event) {
     var url = app.globalData.zbtcBase + "/DPlatform/wct/bas/fbas0020_refundMemberFee.st"
     var data = {
       "memberId": this.data.userInfo.memberid
     }
     util.http(url, data, "POST", this.processDeposit, false)
   },
-  processDeposit:function(data){
+  processDeposit: function(data) {
     console.log(data);
     var message = data.message;
     var userInfo = this.data.userInfo;
     userInfo.memberid = "";
     userInfo.memberExpirationDate = "";
-    userInfo.memberStartTime ="";
+    userInfo.memberStartTime = "";
     userInfo.memberType = "";
     wx.setStorageSync("userInfo", userInfo);
     this.setData({

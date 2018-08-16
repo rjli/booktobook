@@ -24,66 +24,44 @@
       </block>
     </view>
   </view>
-  <view class="content  {{depositDisabled? 'hide'  :''}}">
-    <view class="content-title">
-      <text>押金用户</text>
-    </view>
-    <view class="content-detail">
-      <view>
-        <icon class="fa fa-check-square-o" />
-        <text class="detail">借书期间一天0.5元</text>
+  <block wx:for="{{memberTypeList}}" wx:for-item="memberType">
+    <view class="content {{depositDisabled && memberType.name=='押金用户' ? 'hide' : ''}} ">
+      <view class="content-title">
+        <text>{{memberType.name}}</text>
       </view>
-      <view>
-        <icon class="fa fa-check-square-o" />
-        <text class="detail">不定时现金红包</text>
-      </view>
-      <view>
-        <icon class="fa fa-check-square-o" />
-        <text class="detail">专项购书优惠</text>
-      </view>
-      <view class="hr"></view>
-      <view class="memberfee">
-        <text class="fee-text">押金/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='押金用户' >199元</text>
-      </view>
-    </view>
-  </view>
-  <view class="content">
-    <view class="content-title">
-      <text>会员专享</text>
-    </view>
-    <view class="content-detail">
-      <view>
-        <icon class="fa fa-check-square-o" />
-        <text class="detail">全年免费借书</text>
-      </view>
-      <view>
-        <icon class="fa fa-check-square-o" />
-        <text class="detail">不定时现金红包</text>
-      </view>
-      <view>
-        <icon class="fa fa-check-square-o" />
-        <text class="detail">专项购书优惠</text>
-      </view>
-      <view class="hr"></view>
-      <view class="memberfee">
-        <text class="fee-text">会员/年</text>
-        <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='普通会员'  >199元</text>
+      <view class="content-detail">
+        <view>
+          <icon class="fa fa-check-square-o" />
+          <text class="detail" wx:if="{{memberType.cost == 0}}">全年免费借书</text>
+          <text class="detail" wx:else>借书期间一天{{memberType.cost}}元</text>
+        </view>
+        <view>
+          <icon class="fa fa-check-square-o" />
+          <text class="detail ">不定时现金红包</text>
+        </view>
+        <view>
+          <icon class="fa fa-check-square-o" />
+          <text class="detail">专项购书优惠</text>
+        </view>
+        <view class="hr"></view>
+        <view class="memberfee">
+          <text class="fee-text">会员/年</text>
+          <text class="fee-btn" catchtap="powerDrawer" data-statu="open" data-member-type='普通会员'>{{memberType.total}}元</text>
+        </view>
       </view>
     </view>
-  </view>
+  </block>
 </view>
-<block wx:if="{{userInfo.memberType == '押金用户'}}">
-  <view class="deposit">
+<block wx:if="{{userInfo.memberType=='押金用户'}} ">
+  <view class="deposit ">
     <button catchtap='onDepositTap'>退还押金</button>
   </view>
 </block>
 <!--mask-->
-<view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_screen " wx:if="{{showModalStatus}}"></view>
 <!--content-->
 <!--使用animation属性指定需要执行的动画-->
 <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
-
   <!--drawer content-->
   <view class="drawer_title">
     <text>购买须知</text>
@@ -93,12 +71,10 @@
   <view class='hr-10'></view>
   <view class="drawer_content">
     <text>●  会员有效期内，您可以无限量借阅书籍</text>
-    <text>●  押金用户在借阅期间一天0.5元</text>
-    <text>●  会员在借阅期间免费借书</text>
     <text>●  每次只能借阅一本图书，归还图书后才能继续借阅</text>
     <text>●  会员过期后，您将不在可以借阅书籍</text>
     <text>●  会员为虚拟产品，已经付费概不退款，敬请谅解</text>
   </view>
   <view class='hr'></view>
-  <view class="btn_ok" bindtap="doUndifiedOrder">购买 {{memberfee}}/年</view>
+  <view class="btn_ok" bindtap="doUndifiedOrder ">购买 {{memberfee}}/年</view>
 </view>

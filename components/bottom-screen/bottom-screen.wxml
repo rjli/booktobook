@@ -1,0 +1,25 @@
+<view wx:if="{{show == 'true'}}">
+  <view wx:if="{{types == 0}}">
+    <view class="pop-alert-box">
+      <image src="../images/icon_alert.png" class="icon_alert" catchtap="callback"></image>
+      <i class="iconfont icon-close" catchtap="close"></i>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="pop-alert-box dialog">
+      <view class="alert-content-box">
+        <image src="../../images/icon_alert.jpg" class="icon-image"></image>
+        <view class="alert-content">
+          <!-- <image src="../../images/icon_alert.jpg" class="icon_alert_dialog"></image> -->
+          <view class="title">红包大派送</view>
+          <view class="title-doc">恭喜您获得{{count}}元红包，快快领取吧</view>
+          <view class="btn_box">
+            <view class="button type_red" catchtap="callback">立即领取</view>
+          </view>
+        </view>
+      </view>
+      <i class="iconfont icon-close" catchtap="close"></i>
+    </view>
+  </view>
+  <view class="alert_mask" catchtap="close"></view>
+</view>

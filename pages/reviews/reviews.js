@@ -10,6 +10,11 @@ Page({
   onLoad: function(options) {
     this.getReturnBookList(this.data.totalCount);
   },
+  onshow: function() {
+    if (app.globalData.isBack) {
+      his.getReturnBookList(this.data.totalCount);
+    }
+  },
   onReachBottom: function(event) {
     this.getReturnBookList(this.data.totalCount);
   },

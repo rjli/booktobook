@@ -45,8 +45,37 @@
   justify-content: space-between;
   /* top: 100; */
 }
-.login-btn{
+
+.login-btn {
   color: #1aad19;
+}
+
+.promotion {
+  background-color: white;
+  height: 8vh;
+  width: 90%;
+  /* position: fixed; */
+  margin: 10rpx auto 0;
+  padding: 10rpx 10rpx 10rpx;
+  display: flex;
+  justify-content: space-between;
+  /* top: 100; */
+}
+
+.promotion-image {
+  width: 12vh;
+  height: 8vh;
+  padding: 4rpx;
+}
+
+.promotion cover-view {
+  font-size: 36rpx;
+  line-height: 2.4;
+  color:#666;
+}
+
+.grey {
+  color: #999 !important;
 }
 
 .container {

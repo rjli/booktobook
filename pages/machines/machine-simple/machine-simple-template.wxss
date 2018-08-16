@@ -63,9 +63,6 @@
 .blue {
   color: #39c;
 }
-cover-view{
-  font-size: 24rpx;
-}
 
 .unit-detail{
   display: flex;

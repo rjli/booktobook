@@ -82,10 +82,10 @@ Page({
     var data = {
       "machineId": this.data.machineId,
       "bookcaseId": this.data.bookcaseId,
-      "bookListId": this.processShalveData,
+      "bookListId": booklistId,
       "userId": wx.getStorageSync('userInfo').userid
     }
-    util.http(url, data, "POST", callBack, false);
+    util.http(url, data, "POST", this.processShalveData, false);
 
   },
   processShalveData: function (data) {

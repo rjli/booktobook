@@ -9,11 +9,17 @@
 
 <view class="container" wx:if="{{containerShow}}">
   <map id="bookMap" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markerTap" bindcontroltap="bindcontroltap" show-location>
-    <cover-view class="login" wx:if="{{!hasUserInfo}}">
-      <cover-view> 登录之后才可以借书哦</cover-view>
-      <cover-view class="login-btn" catchtap='onLoginTap'>去登录></cover-view>
-
+    <cover-view class="login" wx:if="{{!hasUserInfo}}" catchtap='onLoginTap'>
+      <cover-view> 亲，您还没有登录哦</cover-view>
+      <cover-view class="login-btn">去登录？〉</cover-view>
     </cover-view>
+
+    <cover-view class="promotion" wx:if="{{promotion}}" catchtap='onPromationTap' data-promotion-id="{{promotion.id}}" data-promotion-image-url="{{promotion.showCoverPictures}}" data-cover-url="{{promotion.showPictures}}">
+      <cover-image class="promotion-image" src="{{promotion.showPictures}}"></cover-image>
+      <cover-view> {{promotion.name}}</cover-view>
+      <cover-view class="grey">></cover-view>
+    </cover-view>
+
     <cover-view class="show-popup" hidden="{{hideShopPopup}}">
       <cover-view class="popup-mask" bindtap="closePopupTap"></cover-view>
       <cover-view class="popup-contents">
@@ -32,3 +38,5 @@
     <template is="emptyTemplate" data="{{message}}" />
   </bolck>
 </view>
+
+<!-- <bottom-screen types="1" show="true" count="10" bindcustomevent="onReceivingTap"></bottom-screen> -->

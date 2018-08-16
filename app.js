@@ -1,9 +1,10 @@
 App({
   globalData: {
-    zbtcBase: "https://abc.rchjxx.com",
+    zbtcBase: "https://acd.rchjxx.com",
+    zbtcBase1: "https://abc.rchjxx.com",
     isBack: false
   },
-  isUserLogin: function () {
+  isUserLogin: function() {
     let result = true;
     let userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {

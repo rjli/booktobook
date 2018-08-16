@@ -13,20 +13,24 @@ Page({
     iconSize: 50,
     machines: [],
     markers: [],
-    message: "请输入附近的店名搜索，比如娇书坊"
+    message: "请输入附近的店名搜索，比如娇书坊",
+    promotion: ""
   },
   // 页面加载
-  onLoad: function (options) {
+  onLoad: function(options) {
     let userInfo = wx.getStorageSync('userInfo');
     if (userInfo) {
       this.setData({
-        hasUserInfo: true
+        hasUserInfo: true,
+        userInfo: userInfo
       })
+      //获取正在进行的活动
+      this.getPromotions();
     }
     this.initMap();
   },
   // 页面显示
-  onShow: function () {
+  onShow: function() {
     this.setData({
       containerShow: true,
       searchPanelShow: false,
@@ -34,18 +38,22 @@ Page({
     if (app.globalData.isBack) {
       app.globalData.isBack = false;
       this.setData({
-        hasUserInfo: true
+        hasUserInfo: true,
+        userInfo: wx.getStorageSync('userInfo')
       })
     }
     // 1.创建地图上下文，移动当前位置到地图中心
     this.mapCtx = wx.createMapContext("bookMap");
     this.movetoPosition();
+    if (this.data.hasUserInfo) {
+      this.updateUserInfo();
+    }
   },
-  onLoginTap: util.throttle(function () {
+  onLoginTap: util.throttle(function() {
     app.isUserLogin();
   }),
   //初始化地图页面信息
-  initMap: function () {
+  initMap: function() {
     // 1.获取并设置当前位置经纬度
     wx.getLocation({
       type: "gcj02",
@@ -68,77 +76,77 @@ Page({
       success: (res) => {
         this.setData({
           controls: [{
-            id: 1,
-            iconPath: '/images/icon/location.png',
-            position: {
-              left: 10,
-              top: res.windowHeight - this.data.iconBottom,
-              width: this.data.iconSize,
-              height: this.data.iconSize
+              id: 1,
+              iconPath: '/images/icon/location.png',
+              position: {
+                left: 10,
+                top: res.windowHeight - this.data.iconBottom,
+                width: this.data.iconSize,
+                height: this.data.iconSize
+              },
+              clickable: true
+            }, {
+              id: 2,
+              iconPath: '/images/icon/borrow.png',
+              position: {
+                left: 80,
+                top: res.windowHeight - this.data.iconBottom + 5,
+                width: 100,
+                height: 40
+              },
+              clickable: true
+            }, {
+              id: 3,
+              iconPath: '/images/icon/return.png',
+              position: {
+                left: res.windowWidth / 2 + 10,
+                top: res.windowHeight - this.data.iconBottom + 5,
+                width: 100,
+                height: 40
+              },
+              clickable: true
             },
-            clickable: true
-          }, {
-            id: 2,
-            iconPath: '/images/icon/borrow.png',
-            position: {
-              left: 80,
-              top: res.windowHeight - this.data.iconBottom + 5,
-              width: 100,
-              height: 40
+            {
+              id: 4,
+              iconPath: '/images/icon/warn.png',
+              position: {
+                left: res.windowWidth - 60,
+                top: res.windowHeight - this.data.iconBottom,
+                width: this.data.iconSize,
+                height: this.data.iconSize
+              },
+              clickable: true
             },
-            clickable: true
-          }, {
-            id: 3,
-            iconPath: '/images/icon/return.png',
-            position: {
-              left: res.windowWidth / 2 + 10,
-              top: res.windowHeight - this.data.iconBottom + 5,
-              width: 100,
-              height: 40
+            {
+              id: 5,
+              iconPath: '/images/icon/marker.png',
+              position: {
+                left: res.windowWidth / 2 - 11,
+                top: res.windowHeight / 2 - 45,
+                width: 22,
+                height: 40
+              },
+              clickable: true
             },
-            clickable: true
-          },
-          {
-            id: 4,
-            iconPath: '/images/icon/warn.png',
-            position: {
-              left: res.windowWidth - 60,
-              top: res.windowHeight - this.data.iconBottom,
-              width: this.data.iconSize,
-              height: this.data.iconSize
-            },
-            clickable: true
-          },
-          {
-            id: 5,
-            iconPath: '/images/icon/marker.png',
-            position: {
-              left: res.windowWidth / 2 - 11,
-              top: res.windowHeight / 2 - 45,
-              width: 22,
-              height: 40
-            },
-            clickable: true
-          },
-          {
-            id: 6,
-            iconPath: '/images/icon/avatar.png',
-            position: {
-              left: res.windowWidth - 60,
-              top: res.windowHeight - this.data.iconBottom - 60,
-              width: this.data.iconSize,
-              height: this.data.iconSize
-            },
-            clickable: true
-          }
+            {
+              id: 6,
+              iconPath: '/images/icon/avatar.png',
+              position: {
+                left: res.windowWidth - 60,
+                top: res.windowHeight - this.data.iconBottom - 60,
+                width: this.data.iconSize,
+                height: this.data.iconSize
+              },
+              clickable: true
+            }
           ]
         })
       }
     });
   },
-  processMachinesData: function (data) {
+  processMachinesData: function(data) {
     var machines = []
-    data.forEach(function (item, index) {
+    data.forEach(function(item, index) {
       machines.push({
         // width: 30,
         // height: 40,
@@ -160,31 +168,33 @@ Page({
   },
 
   // 地图控件点击事件
-  bindcontroltap: function (e) {
+  bindcontroltap: function(e) {
     // 判断点击的是哪个控件 e.controlId代表控件的id，在页面加载时的第3步设置的id
     switch (e.controlId) {
       // 点击定位控件
-      case 1: this.movetoPosition();
+      case 1:
+        this.movetoPosition();
         break;
-      // 点击立即借书，判断当前是否有在借书籍
+        // 点击立即借书，判断当前是否有在借书籍
       case 2:
         this.borrowBook();
         break;
-      // 点击保障控件，跳转到报障页
+        // 点击保障控件，跳转到报障页
       case 3:
         this.returnBook();
         break;
       case 4:
         this.gotoProblem();
         break;
-      // 点击头像控件，跳转到个人中心
+        // 点击头像控件，跳转到个人中心
       case 6:
         this.goToMine();
         break;
-      default: break;
+      default:
+        break;
     }
   },
-  gotoProblem: util.throttle(function () {
+  gotoProblem: util.throttle(function() {
     if (!app.isUserLogin()) {
       return;
     }
@@ -193,7 +203,7 @@ Page({
       url: '../problem/problem?problemType=base',
     })
   }),
-  goToMine: util.throttle(function () {
+  goToMine: util.throttle(function() {
     if (!app.isUserLogin()) {
       return;
     }
@@ -202,7 +212,7 @@ Page({
     });
   }),
   // 地图视野改变事件
-  bindregionchange: function (e) {
+  bindregionchange: function(e) {
     // 拖动地图，获取附件单车位置
     if (e.type == "end") {
       this.mapCtx.getCenterLocation({
@@ -217,13 +227,13 @@ Page({
             "latitude": res.latitude,
             "longitude": res.longitude
           }
-         this.findMachines(data, this.processMachinesData);
+          this.findMachines(data, this.processMachinesData);
         }
       });
     }
   },
   // 地图标记点击事件，连接用户位置和点击借书机的位置
-  markerTap: function (e) {
+  markerTap: function(e) {
     if (!app.isUserLogin()) {
       return;
     }
@@ -237,8 +247,7 @@ Page({
 
   },
   //根据marker的id获取详情信息
-  getMarkerById: function (id) {
-    console.log("/根据marker的id获取详情信息");
+  getMarkerById: function(id) {
     var that = this;
     var markers = that.data.markers;
     var len = markers.length;
@@ -253,15 +262,15 @@ Page({
     return result;
   },
   /**
-  * marker选择弹出框隐藏 
-  */
-  closePopupTap: function () {
+   * marker选择弹出框隐藏 
+   */
+  closePopupTap: function() {
     this.setData({
       hideShopPopup: true
     })
   },
   // 根据条件获取借书机
-  findMachines: function (data, callBack) {
+  findMachines: function(data, callBack) {
     var url = app.globalData.zbtcBase + "/DPlatform/btb/mach/fmach0030_findMachines.st"
     util.http(url, data, "GET", callBack, true);
   },
@@ -269,7 +278,7 @@ Page({
    * 搜索控件获取焦点事件
    * 显示serach-pannel
    */
-  onBindFocus: function (event) {
+  onBindFocus: function(event) {
     if (!app.isUserLogin()) {
       return;
     }
@@ -278,20 +287,24 @@ Page({
       searchPanelShow: true
     });
   },
-  borrowBook: util.throttle(function () {
+  borrowBook: util.throttle(function() {
     if (!app.isUserLogin()) {
       return;
     }
-    wx.navigateTo({
-      url: 'member/member',
-    })
+    if (!this.data.userInfo.memberid) {
+      wx.navigateTo({
+        url: '../member/member',
+      })
+      return;
+    }
+
     var url = app.globalData.zbtcBase + "/DPlatform/btb/bro/fbro0020_onGoingBorrowingRecord.st"
     var data = {
-      "memberId": wx.getUserInfo.memberid
+      "memberId": this.data.userInfo.memberid
     }
     util.http(url, data, "GET", this.processBorrowData, false);
   }),
-  processBorrowData: function (data) {
+  processBorrowData: function(data) {
     if (data.length <= 0) {
       wx.scanCode({
         scanType: "qrCode",
@@ -307,8 +320,8 @@ Page({
           wx.navigateTo({
             url: '../machines/machine/machine?id=' + id + '&type=bookList&btnType=borrow',
           })
-        }, fail: (res) => {
-        }
+        },
+        fail: (res) => {}
       })
     } else {
       wx.showModal({
@@ -317,10 +330,17 @@ Page({
       })
     }
   },
-  returnBook: util.throttle(function () {
+  returnBook: util.throttle(function() {
     if (!app.isUserLogin()) {
       return;
     }
+    if (!this.data.userInfo.memberid) {
+      wx.navigateTo({
+        url: '../member/member',
+      })
+      return;
+    }
+
     wx.navigateTo({
       url: '../borrow/borrow?pageType=borrow',
     })
@@ -329,7 +349,7 @@ Page({
   /**
    *搜索借书机
    */
-  onBindConfirm: function (event) {
+  onBindConfirm: function(event) {
     var name = event.detail.value;
     var data = {
       "name": name
@@ -337,18 +357,17 @@ Page({
     this.findMachines(data, this.showSearchResult);
 
   },
-  showSearchResult: function (data) {
-    if (data.length > 0) {
-      this.setData({
-        machines: data,
-      });
-    } else {
+  showSearchResult: function(data) {
+    if (data.length <= 0) {
       this.setData({
         message: '附近还没有借书机哦'
       })
     }
+    this.setData({
+      machines: data,
+    });
   },
-  onCancelImgTap: util.throttle(function (event) {
+  onCancelImgTap: util.throttle(function(event) {
     this.setData({
       containerShow: true,
       searchPanelShow: false
@@ -357,37 +376,66 @@ Page({
   /**
    * 跳转到借书机页面
    */
-  onMachineTap: util.throttle(function (event) {
+  onMachineTap: util.throttle(function(event) {
     let machineId = event.currentTarget.dataset.machineId;
     wx.navigateTo({
       url: '../machines/machine/machine?id=' + machineId + '&type=bookList&btnType=simple',
     })
   }),
   // 定位函数，移动位置到地图中心
-  movetoPosition: function () {
+  movetoPosition: function() {
     this.mapCtx.moveToLocation();
   },
-  /*
-  * 右上角转发功能 
-  * */
-  onShareAppMessage: function (res) {
-    var that = this;
-    console.log(res);
-    if (res.from === 'menu') {
-      // 来自页面内转发按钮
-      console.log(res.target)
+  /**
+   * 获取正在进行的活动
+   */
+  getPromotions: function() {
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/act/fact0030_findActiveList.st"
+    var data = {
+      "userId": this.data.userInfo.memberid
     }
-    return {
-      path: '/pages/index/index',
-      success: function (res) {
-        // 转发成功
-        console.log(res);
-      },
-      fail: function (res) {
-        // 转发失败
-        console.log(res);
+    util.http(url, data, "GET", this.processPromotionData, false);
+  },
+  processPromotionData: function(data) {
+    if (data) {
+      console.log(data);
+      this.setData({
+        promotion: data
+      })
 
-      }
+    }
+  },
+  onPromationTap: function(event) {
+    // var promotionId = event.currentTarget.dataset.promotionId;
+    // var promotionImageUrl = event.currentTarget.dataset.promotionImageUrl;
+    // var coverUrl = event.currentTarget.dataset.coverUrl;
+    var promotionStr = JSON.stringify(this.data.promotion);
+    wx.navigateTo({
+      url: '../promotion/promotion?promotionStr=' + promotionStr,
+    })
+  },
+  /**
+   * 更新会员信息
+   */
+  updateUserInfo: function() {
+    var url = app.globalData.zbtcBase + "/DPlatform/btb/mbr/fmbr0050_judgeMember.st";
+    var data = {
+      "userId": this.data.userInfo.userid
+    }
+    util.http(url, data, "POST", this.processUpdateUserInfo, true);
+  },
+  processUpdateUserInfo: function(data) {
+    if (data) {
+      var tempUserInfo = this.data.userInfo;
+      tempUserInfo.binduserid = data.binduserid ? data.binduserid : "";
+      tempUserInfo.memberid = data.memberid ? data.memberid : "";
+      tempUserInfo.memberType = data.memberType ? data.memberType : "";
+      tempUserInfo.memberStartDate = data.memberStartDate ? data.memberStartDate : "";
+      tempUserInfo.memberExpirationDate = data.memberExpirationDate ? data.memberExpirationDate : "";
+      this.setData({
+        userInfo: tempUserInfo
+      })
+      wx.setStorageSync('userInfo', tempUserInfo);
     }
   }
 })

@@ -1,8 +1,9 @@
 {
   "pages": [
-      "pages/index/index",
-    "pages/mine/mine",
+    "pages/index/index",
     "pages/member/member",
+    "pages/promotion/promotion",
+    "pages/mine/mine",
     "pages/booklists/booklist-share/booklist-share",
     "pages/problem/problem",
     "pages/reviews/reviews",
