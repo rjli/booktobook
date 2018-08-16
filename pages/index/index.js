@@ -392,7 +392,7 @@ Page({
   getPromotions: function() {
     var url = app.globalData.zbtcBase + "/DPlatform/btb/act/fact0030_findActiveList.st"
     var data = {
-      "userId": this.data.userInfo.memberid
+      "userId": this.data.userInfo.userid
     }
     util.http(url, data, "GET", this.processPromotionData, false);
   },
@@ -406,9 +406,6 @@ Page({
     }
   },
   onPromationTap: function(event) {
-    // var promotionId = event.currentTarget.dataset.promotionId;
-    // var promotionImageUrl = event.currentTarget.dataset.promotionImageUrl;
-    // var coverUrl = event.currentTarget.dataset.coverUrl;
     var promotionStr = JSON.stringify(this.data.promotion);
     wx.navigateTo({
       url: '../promotion/promotion?promotionStr=' + promotionStr,

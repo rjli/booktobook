@@ -85,7 +85,15 @@ Page({
       success: function(res) {
         // 转发成功
         console.log("转发成功")
-        that.addPromotionsDetial();
+        console.log(that.data.promotion.message.indexOf("已参加") > -1)
+        if (that.data.promotion.message.indexOf("已参加") > -1) {
+          wx.showModal({
+            title: '通知',
+            content: '您已经参加过活动了，此次分享不会再发红包了哦'
+          })
+        } else {
+          that.addPromotionsDetial();
+        }
       },
       fail: function(res) {
         // 转发失败
@@ -130,18 +138,23 @@ Page({
   },
   processReceivingData: function(data) {
     console.log(data);
+    var that = this;
     if (data && data.message.indexOf("成功") > -1) {
       wx.showModal({
         title: '通知',
         content: '你的红包' + this.data.total + '已到账，是否到我的红包查看',
         success: function(res) {
           if (res.confirm) {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../mine/wallet/wallet',
             })
           } else if (res.cancel) {
-            console.log('用户点击取消')
+            console.log('用户点击取消');
+            wx.navigateBack({
+              delta: 1
+            })
           }
+
         }
       })
     }
