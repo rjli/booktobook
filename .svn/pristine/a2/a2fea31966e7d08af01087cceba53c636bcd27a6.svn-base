@@ -1,0 +1,33 @@
+.container {
+  padding: 20rpx 40rpx;
+}
+
+.single-view-container {
+  border-top: 1px solid #666;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.case-list {
+  margin-top: 60rpx;
+}
+
+.case-item {
+  margin-right: 10rpx;
+  border: 1rpx solid #666;
+  border-radius: 20rpx;
+  padding: 0rpx 10rpx 10rpx;
+  margin-bottom: 10rpx;
+  display: inline-block;
+}
+
+.case-item radio {
+  display: none;
+}
+
+.active {
+  background-color: green;
+  color: white;
+  border: 1rpx solid green;
+}

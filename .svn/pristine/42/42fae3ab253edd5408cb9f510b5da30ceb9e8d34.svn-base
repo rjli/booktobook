@@ -1,0 +1,108 @@
+.header-title {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-text {
+  font-size: 40rpx;
+}
+
+.head-share button {
+  width: 60rpx;
+  height: 60rpx;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.share-icon {
+  font-size: 30px;
+}
+
+.header {
+  position: relative;
+}
+
+.head-img {
+  width: 100vh;
+  height: 40vh;
+  opacity: 0.6;
+}
+
+.head-img-hover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.head-title {
+  margin-bottom: 20rpx;
+  text-align: center;
+  margin-right: 40rpx;
+  margin-top: 110rpx;
+}
+
+.movie-img {
+  height: 98%;
+  width: 46%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.main-title {
+  font-size: 34rpx;
+  color: #fff;
+  margin-left: 40rpx;
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+}
+
+.info {
+  writing-mode: vertical-rl;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: -120rpx;
+  margin-left: 20rpx;
+}
+
+.info text {
+  font-size: 60rpx;
+  letter-spacing: 2px;
+}
+
+.white {
+  color: white;
+}
+
+.gray {
+  color: gray;
+}
+
+.classic {
+  padding-top: 140rpx;
+  text-align: center;
+}
+
+.classic text {
+  font-size: 40rpx;
+}
+
+Page {
+  background-color: white;
+}
+
+.share-image {
+  width: 600rpx;
+  height: 888rpx;
+  margin: 0 75rpx;
+  border: 1px solid black;
+}
+
+button {
+  margin-top: 20rpx;
+}

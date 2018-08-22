@@ -1,0 +1,31 @@
+.container {
+  padding: 0 40rpx;
+}
+
+.score-container {
+  padding-top: 40rpx;
+  text-align: center;
+}
+
+.score-title {
+  color: green;
+  font-size: 30rpx;
+}
+
+.score-content {
+   margin-top: 20rpx; 
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  margin-top: 40rpx;
+  width: 100%;
+  height: 300rpx;
+  border: 1px solid grey;
+  border-radius: 20rpx;
+}
+
+.content textarea {
+  padding: 20rpx;
+}

@@ -1,0 +1,133 @@
+.container {
+  padding: 0rpx 40rpx;
+}
+
+.wantbook {
+  width: 100%;
+  height: 360rpx;
+}
+
+.wantbook image {
+  width: 100%;
+  height: 360rpx;
+}
+.want-text{
+  font-size: 24rpx;
+  padding: 20rpx 0;
+  color: #999;
+}
+
+.qrcode {
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+  color: #999;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+
+.qrcode text {
+  height: 100%;
+  width: 600rpx;
+  margin-left: 10px;
+  font-size: 32rpx;
+}
+
+.choose {
+  background-color: #fff;
+  font-size: 24rpx;
+}
+
+.choose .title {
+  font-size: 24rpx;
+  background-color: #fff;
+  padding: 20rpx 0 0 40rpx;
+}
+
+.choose-grids {
+  padding: 30rpx;
+}
+
+.choose-grids .grid {
+  width: 96%;
+  height: 80rpx;
+  margin-bottom: 10rpx;
+  border-radius: 6rpx;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+  text-align: left;
+  border: 2rpx solid #d9d9d9;
+}
+
+.choose-grids .grid:first-child, .choose-grids .grid:nth-of-type(2) {
+  margin-top: 0;
+}
+
+.content textarea {
+  padding: 20rpx;
+  margin: 20rpx 0;
+  width: 630rpx;
+  height: 160rpx;
+  /* border: 1px solid grey; */
+  border-radius: 10rpx;
+  background-color: white;
+}
+.content-want textarea{
+ padding: 20rpx;
+  margin: 20rpx 0;
+  width: 95%;
+  height: 300rpx;
+  /* border: 1px solid grey; */
+  border-radius: 10rpx;
+  background-color: white;
+}
+
+.action-photo {
+  background-color: #fff;
+  padding: 10rpx 0px 30rpx 50rpx;
+}
+
+.action-photo image {
+  position: relative;
+  display: inline-block;
+  width: 120rpx;
+  height: 120rpx;
+  overflow: visible;
+  margin-left: 25rpx;
+}
+
+.action-photo image icon.del {
+  display: block;
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+}
+
+.action-photo text.add {
+  display: inline-block;
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #ccc;
+  border: 2rpx dotted #ccc;
+  /* margin-left: 25rpx; */
+  vertical-align: top;
+}
+
+.action-input {
+  padding-left: 20rpx;
+  margin-top: 30rpx;
+  background-color: #fff;
+}
+
+.action-input input {
+  width: 90%;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+}
+
+.red {
+  color: red;
+  margin-top: 20rpx;
+}

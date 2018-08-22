@@ -1,0 +1,174 @@
+@import "../machines/machine-simple/machine-simple-template.wxss";
+@import "../empty/empty-template.wxss";
+
+.search {
+  background-color: #f2f2f2;
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+}
+
+.search-img {
+  margin: auto 0 auto 20rpx;
+}
+
+.search input {
+  height: 100%;
+  width: 600rpx;
+  margin-left: 20px;
+  font-size: 28rpx;
+}
+
+.placeholder {
+  font-size: 14px;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+.xx-img {
+  height: 28rpx;
+  width: 28rpx;
+  margin: auto 0 auto 10rpx;
+}
+
+.login {
+  background-color: white;
+  height: 4vh;
+  width: 80%;
+  /* position: fixed; */
+  margin: 10rpx auto 0;
+  padding: 20rpx 10rpx 10rpx;
+  display: flex;
+  justify-content: space-between;
+  /* top: 100; */
+}
+
+.login-btn {
+  color: #1aad19;
+}
+
+.promotion {
+  background-color: white;
+  height: 8vh;
+  width: 90%;
+  /* position: fixed; */
+  margin: 10rpx auto 0;
+  padding: 10rpx 10rpx 10rpx;
+  display: flex;
+  justify-content: space-between;
+  /* top: 100; */
+}
+
+.promotion-image {
+  width: 12vh;
+  height: 8vh;
+  padding: 4rpx;
+}
+
+.promotion cover-view {
+  font-size: 36rpx;
+  line-height: 2.4;
+  color:#666;
+}
+
+.grey {
+  color: #999 !important;
+}
+
+.container {
+  width: 100%;
+  height: 94vh;
+  position: fixed;
+  bottom: 0;
+}
+
+#bookMap {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.searchPanelShow {
+  margin-top: 6vh;
+}
+
+/*显示底部借书机信息*/
+
+.show-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+.popup-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.popup-contents {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 6;
+}
+
+.pop-goods-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #eee;
+}
+
+.pop-img-box {
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+  margin-right: 26rpx;
+}
+
+.pop-img-box .goods-thumbnail {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.pop-goods-title {
+  width: 484rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 26rpx;
+  color: #000;
+}
+
+.pop-goods-price {
+  font-size: 26rpx;
+  color: #e64340;
+  margin-top: 20rpx;
+}
+
+.pop-goods-close {
+  width: 36rpx;
+  height: 36rpx;
+  flex: 1;
+  /* background:url("/images/icon/popup-close.png") no-repeat center center; */
+  background-size: 36rpx auto;
+  /* align-self: flex-start; *//* margin-top: -10rpx; */
+  position: absolute;
+  top: 20rpx;
+  left: 680rpx;
+}

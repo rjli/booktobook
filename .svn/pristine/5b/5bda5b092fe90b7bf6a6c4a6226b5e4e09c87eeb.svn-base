@@ -1,0 +1,5 @@
+/* pages/promotion/promotion.wxss */
+.image {
+  width: 100%;
+ 
+}

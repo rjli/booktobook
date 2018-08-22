@@ -1,0 +1,58 @@
+/* pages/mine/mine.wxss */
+
+.user-info {
+  background-color: #fff;
+  padding: 60rpx 40rpx;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+}
+
+.crown {
+  width: 60rpx !important;
+  height: 80rpx !important;
+  margin-left: 20rpx;
+  margin-top: -12rpx;
+}
+
+.membername {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #955e2b;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+}
+
+.member-avatar {
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  /* margin: 0 auto; */
+  /* margin-left: 40rpx; */
+  margin-right: 40rpx;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.2);
+}
+
+.not_member {
+  color: red;
+}
+
+.btn-login {
+  position: absolute;
+  bottom: 60rpx;
+  width: 90%;
+  left: 50%;
+  margin-left: -45%;
+}
+
+.gray {
+  background-color: #ccc;
+}
+
+.mine-icon {
+  margin-top: -8rpx;
+}

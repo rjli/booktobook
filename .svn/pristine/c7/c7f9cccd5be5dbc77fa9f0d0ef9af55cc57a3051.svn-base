@@ -1,0 +1,8 @@
+ @import "review/review-template.wxss"; 
+ @import "../empty/empty-template.wxss"; 
+
+.container {
+}
+page {
+  background-color: #f2f2f2;
+}

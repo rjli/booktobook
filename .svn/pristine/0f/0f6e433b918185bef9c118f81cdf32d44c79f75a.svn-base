@@ -1,0 +1,36 @@
+.container{
+  background-color: #fff;
+}
+swiper {
+  width: 100%;
+  height: 400rpx;
+}
+swiper image {
+  width: 100%;
+  height: 400rpx;
+}
+
+.header {
+  text-align: center;
+  font-size: 40rpx;
+}
+
+.summary {
+  color: #666;
+}
+
+.machines-icon {
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  margin-top: -8rpx;
+  color: #333;
+}
+
+.detail {
+  color: #333;
+}
+
+.content {
+  padding: 40rpx;
+}
+

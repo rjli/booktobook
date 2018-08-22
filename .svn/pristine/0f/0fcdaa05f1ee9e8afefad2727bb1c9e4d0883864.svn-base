@@ -1,0 +1,26 @@
+<template name="machineSimpleTemplate">
+  <view class="machines-container" catchtap='onMachineTap' data-machine-id="{{id}}">
+    <view class="machine-content">
+      <image class="machine-img" src="{{image}}"></image>
+      <view class="machine-detail">
+        <text class="machine-detail-name">{{name}}</text>
+        <view>
+          <icon class="fa fa-clock-o　machines-icon" />
+          <text class="machine-detail-time">{{businessHour}}</text>
+        </view>
+        <view>
+          <icon class="fa fa-location-arrow　machines-icon" />
+          <text class="machine-detail-location">{{location}}</text>
+        </view>
+
+      </view>
+    </view>
+    <view class="hr mt-20"></view>
+    <view class="unit-detail">
+      <icon class="fa fa-book green" />
+      <text class="highlight-font">{{borrow}}</text>
+      <icon class="fa fa-hand-lizard-o blue" />
+      <text class="highlight-font">{{return}}</text>
+    </view>
+  </view>
+</template>

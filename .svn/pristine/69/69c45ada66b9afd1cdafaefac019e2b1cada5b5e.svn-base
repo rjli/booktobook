@@ -1,0 +1,10 @@
+<import src="../booklists/booklist-grid/booklist-grid-template.wxml" />
+<import src="../empty/empty-template.wxml" />
+<view class='container'>
+  <block wx:if="{{booklists.length>0}}">
+    <template is="booklistGridTemplate" data="{{booklists}}" />
+  </block>
+  <block wx:else>
+    <template is="emptyTemplate" data="{{message}}" />
+  </block>
+</view>

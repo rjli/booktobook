@@ -1,0 +1,98 @@
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+/**
+ *处理http请求
+ */
+function http(url, data, type, callBack, isNavBarLoading) {
+  url = url + '?rkspAutoComplete=true';
+  if (isNavBarLoading) {
+    wx.showNavigationBarLoading();
+  } else {
+    wx.showLoading({
+      title: "加载中...",
+      mask: true
+    })
+  }
+  let contenttype = "json";
+  if (type == "POST") {
+    contenttype = "application/x-www-form-urlencoded";
+  }
+  wx.request({
+    url: url,
+    data: data,
+    method: type,
+    header: {
+      "Content-Type": contenttype
+    },
+    success: function (res) {
+      if (isNavBarLoading) {
+        wx.hideNavigationBarLoading();
+      } else {
+        wx.hideLoading();
+      }
+      if ("success" == res.data.status) {
+        callBack(res.data.result);
+      } else {
+        console.log(res.data.result);
+        if (res.data.result.message != '') {
+          wx.showToast({
+            title: res.data.result.message,
+          })
+        } else {
+          wx.showToast({
+            title: '系统维护中',
+          })
+        }
+      }
+    },
+    fail: function (error) {
+      console.log(error);
+      wx.showToast({
+        title: '网络错误',
+      })
+    }
+  })
+}
+
+function throttle(fn, gapTime) {
+  if (gapTime == null || gapTime == undefined) {
+    gapTime = 1500
+  }
+
+  let _lastTime = null
+
+  // 返回新的函数
+  return function () {
+    let _nowTime = + new Date()
+    if (_nowTime - _lastTime > gapTime || !_lastTime) {
+      fn.apply(this, arguments)   //将this和参数传给原函数
+      _lastTime = _nowTime
+    }
+  }
+}
+//产生随机数函数
+function randNum(n) {
+  var rnd = "";
+  for (var i = 0; i < n; i++)
+    rnd += Math.floor(Math.random() * 10);
+  return rnd;
+}
+module.exports = {
+  formatTime: formatTime,
+  http: http,
+  throttle: throttle,
+  randNum: randNum
+}

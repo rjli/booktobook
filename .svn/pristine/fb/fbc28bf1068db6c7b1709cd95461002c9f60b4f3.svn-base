@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "bottom-screen": "/components/bottom-screen/bottom-screen"
+  }
+}

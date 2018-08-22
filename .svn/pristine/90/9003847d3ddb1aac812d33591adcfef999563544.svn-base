@@ -1,0 +1,9 @@
+<!--pages/promotion/promotion.wxml-->
+<view class="container">
+  <view class=""></view>
+  <view>
+    <image class="image" src="{{promotion.showCoverPictures}}" mode="widthFix"></image>
+  </view>
+
+  <bottom-screen wx:if="{{show}}" types="1" show="{{true}}" count="{{total}}" bindcustomevent="onReceivingTap"></bottom-screen>
+</view>

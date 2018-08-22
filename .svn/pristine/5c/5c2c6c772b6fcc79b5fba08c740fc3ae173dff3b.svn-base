@@ -1,0 +1,95 @@
+@import "../empty/empty-template.wxss";
+
+.container {
+  padding: 0 40rpx;
+}
+
+.book {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20rpx;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookname {
+  font-size: 60rpx;
+}
+
+.book-info  text {
+  margin-bottom: 20rpx;
+}
+
+.book image {
+  height: 353rpx;
+  width: 260rpx;
+  position: absolute;
+  top: 100rpx;
+  right: 40rpx;
+}
+
+.purchase {
+  width: 260rpx;
+  position: absolute;
+  top: 500rpx;
+  right: 40rpx;
+}
+
+.purchase text {
+  font-size: 30rpx;
+  color: orange;
+}
+
+.tips {
+  border-radius: 20rpx;
+  background-color: pink;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+}
+
+.tips text {
+  margin-top: 10rpx;
+}
+
+.operate-btn {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40rpx;
+  padding-right: 20rpx;
+}
+
+.operate-btn button {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.problem {
+  color: red;
+}
+
+.review-title {
+  margin-bottom: 10rpx;
+}
+
+.review-title text {
+  font-weight: bold;
+}
+
+.review-content {
+  border: 1px solid #d9d9d9;
+  border-radius: 20rpx;
+}
+
+.review-content textarea {
+  margin: 10rpx 10rpx;
+  width: 630rpx;
+  height: 160rpx;
+  /* border: 1px solid grey; */
+  border-radius: 10rpx;
+  background-color: white;
+}

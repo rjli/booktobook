@@ -1,0 +1,18 @@
+<view class="drawer_screen" wx:if="{{showModalStatus=='true'}}" data-status="close" bindtap="powerDrawer" data-type="mask" data-mask-tap-close="{{maskTapClose}}"></view>
+
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus=='true'}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">
+    <text>{{title}}</text>
+    <image wx:if="{{isShowClose == 'true'}}" src="/images/icon/xx.png" class="close-img" bindtap="powerDrawer" data-status="close" data-type="image" ></image>
+  </view>
+  <view class='hr-10'></view>
+  <view class="drawer_content">
+    <slot></slot>
+  </view>
+  <view class='hr'></view>
+  <view class="btn_ok" catchtap="onBtnTap">{{btnName}}</view>
+</view>

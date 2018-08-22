@@ -1,0 +1,201 @@
+.container {
+   /* display: flex;  */
+   /* flex-direction: column;  */
+  /* background-color: #fff; */
+}
+
+.head-img {
+  width: 100%;
+  height: 320rpx;
+}
+
+.head-img-hover {
+  width: 100%;
+  height: 320rpx;
+  position: absolute;
+  top: 60rpx;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+}
+
+.member-avatar {
+  display: block;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  /* margin: 0 auto; */
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.2);
+}
+
+.crown {
+  width: 60rpx !important;
+  height: 80rpx !important;
+  margin: 8rpx 20rpx;
+}
+
+.head-img-hover text {
+  display: block;
+  color: #fff;
+  font-size: 40rpx;
+  /* text-align: center; */
+  padding: 10rpx 0;
+}
+
+.not_member {
+  color: red !important;
+  font-size: 24rpx !important;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  background-color: #d9d9d9;
+  margin: 40rpx;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+}
+
+.content-title {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+}
+
+.xx-img {
+  height: 24rpx;
+  width: 24rpx;
+  position: absolute;
+  margin-top: 10rpx;
+  margin-left: 220rpx;
+}
+
+.membername {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #955e2b;
+}
+
+.time-info {
+  font-size: 24rpx !important;
+}
+
+.content-detail {
+  background-color: #fff;
+  padding: 20rpx;
+}
+
+.content-detail icon {
+  color: green;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 20rpx;
+  margin-top: 4rpx；;
+}
+
+.memberfee {
+  padding: 30rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fee-text {
+  padding: 10rpx 0;
+  font-size: 30rpx;
+}
+
+.fee-btn {
+  color: #fff;
+  background-color: #955e2b;
+  padding: 20rpx 40rpx;
+  border-radius: 30rpx;
+}
+
+/*mask*/
+
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  /* border-radius: 20rpx; */
+  opacity: 0.5;
+  overflow: hidden;
+}
+
+/*content*/
+
+.drawer_box {
+  width: 650rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 40%;
+  left: 0;
+  z-index: 1001;
+  background: #fafafa;
+  margin: -150px 50rpx 0 50rpx;
+  border-radius: 8px;
+}
+
+.drawer_title {
+  padding: 15px;
+  font: 20px "microsoft yahei";
+  text-align: center;
+}
+
+.drawer_content {
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx 40rpx;
+}
+
+.drawer_content text {
+  padding-bottom: 20rpx;
+  letter-spacing: 4rpx;
+  color: #333;
+}
+
+.btn_ok {
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+  text-align: center;
+  margin: 20rpx 100rpx;
+  background: #06c;
+  color: #fff;
+}
+
+.deposit{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+ 
+}
+
+.deposit button{
+   color: red !important;
+}
+
+.hide{
+  display: none;
+}
+
+Page{
+  background-color: #fff;
+}

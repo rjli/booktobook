@@ -1,0 +1,41 @@
+<view class='{{problemType=="want"?"":"container"}}'>
+  <!-- <view class="problem-title">
+    为您带来的不便感到非常抱歉，请您描述问题，管理人员将会第一时间解决
+  </view> -->
+   <view  wx:if="{{problemType=='want'}}" class="wantbook">
+     <image src="/images/problem/want.jpg"></image>
+   </view>
+  <view class="qrcode" wx:if="{{problemType=='base'}}" catchtap='onQrcodeTap'>
+    <!-- <indFocus" /> -->
+    <icon class="fa fa-qrcode" size='32'></icon>
+    <text wx:if="{{machineId}}" class="placeholder">{{machineId}}</text>
+    <text wx:else class="placeholder">点击扫描二维码</text>
+  </view>
+  <view class="choose" wx:if="{{problemType !='want'}}">
+    <view class="title">请选择故障类型</view>
+    <radio-group bindchange="radioboxChange" class="choose-grids">
+      <block wx:for="{{issues}}" wx:key="{{item}}">
+        <view class="grid">
+          <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.value}}
+        </view>
+      </block>
+    </radio-group>
+  </view>
+  <view class="action-photo">
+     <view class="want-text" wx:if="{{problemType=='want'}}">上传你喜欢的图书的封面</view>
+    <block wx:for="{{picUrls}}" wx:key="{{item}}" wx:index="{{index}}">
+      <image src="{{item}}">
+        <icon type="cancel" data-index="{{index}}" color="red" size="18" class="del" bindtap="delPic" />
+      </image>
+    </block>
+    <text class="add" bindtap="bindCamera">{{actionText}}</text>
+  </view>
+  <view wx:if="{{itemsValue[2].checked}}" class="action-input">
+    <input bindinput="numberChange" type="number" cursor-spacing="20" name="number" placeholder="请输入柜门编号" />
+  </view> 
+  <view class="{{problemType =='want' ? 'content-want' :'content'}}">
+    <textarea placeholder='请描述具体问题' show-confirm-bar="{{false}}" bindblur="onProblemBlur" cursor-spacing="20"></textarea>
+  </view>
+  <button class='btn-common' disabled="{{disabled}}" catchtap='onProblemTap'> 提交</button>
+  <text wx:if="{{resultMessage}}" class="red">{{resultMessage}}</text>
+</view>

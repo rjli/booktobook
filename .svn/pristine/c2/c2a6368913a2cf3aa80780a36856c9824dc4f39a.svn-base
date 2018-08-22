@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="title">请输入充值金额</view>
+  <view class="input-box">
+    <input bindinput="bindInput" type="number"/>
+  </view>
+  <button bindtap="doUndifiedOrder" class="btn-common">充值</button>
+</view>

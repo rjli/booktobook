@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="score-container">
+    <text class='score-title'>点击星星评分</text>
+    <view class="score-content">
+      <star-rating bindchange="handleChange" showScore="true">
+      </star-rating>
+    </view>
+  </view>
+  <view class="content">
+    <textarea show-confirm-bar="false" placeholder='请输入您的评论' catchblur="onCommentBlur"  focus="{{focus}}">
+    </textarea>
+  </view>
+
+  <button class='btn-common' catchtap='onSureTap'>确定</button>
+</view>

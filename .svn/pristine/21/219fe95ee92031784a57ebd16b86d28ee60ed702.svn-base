@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="logo">
+    <image src="/images/logo.png"></image>
+  </view>
+  <view class="info">
+    <image src="/images/info.png"></image>
+  </view>
+  <button class="btn-common" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" lang="zh_CN"><icon class=" fa fa-wechat login-icon "></icon>微信快速登录</button>
+</view>

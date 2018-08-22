@@ -1,0 +1,121 @@
+@import "../../booklists/booklist/booklist-simple-template.wxss";
+.container {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.header-img {
+  width: 100%;
+  height: 400rpx;
+  /* -webkit-filter:blur(2px); */
+}
+
+.like {
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  font-size: 40rpx;
+  line-height: 40rpx;
+}
+
+.highlight-font {
+  color: #f21146;
+  font-size: 40rpx;
+  margin-right: 60rpx;
+  margin-left: 16rpx;
+  /* vertical-align: middle; */
+}
+
+.plain-font {
+  color: #666;
+  vertical-align: middle;
+  margin-left: 8rpx;
+}
+
+.summary {
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+  color: #777;
+}
+
+.original-title {
+  color: #1f3463;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.original-title text {
+  font-size: 30rpx;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10rpx;
+}
+
+.icon {
+  color: #999;
+  margin-top: -20rpx;
+  font-size: 24rpx;
+}
+
+.mark {
+  white-space: nowrap;
+  color: #999;
+  vertical-align: middle;
+  margin-left: 10rpx;
+}
+
+.info {
+  margin-left: 10rpx;
+  margin-right: 30rpx;
+}
+
+.case {
+  margin-left: 40rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+}
+
+.case-item {
+  margin-right: 10rpx;
+  border: 1rpx solid #666;
+  border-radius: 20rpx;
+  padding: 0rpx 10rpx 10rpx;
+  margin-bottom: 10rpx;
+  display: inline-block;
+}
+
+.case-item radio {
+  display: none;
+}
+
+.active {
+  background-color: green;
+  color: white;
+  border: 1rpx solid green;
+}
+
+.disable {
+  background-color: red;
+  color: white;
+  border: 1rpx solid red;
+}
+
+.book {
+  margin-left: 40rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+}
+
+.book-font {
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.book-imgs {
+  white-space: nowrap;
+}
+
