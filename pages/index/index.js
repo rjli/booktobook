@@ -408,7 +408,7 @@ Page({
     util.http(url, data, "GET", this.processPromotionData, false);
   },
   processPromotionData: function(data) {
-    if (data) {
+    if (!!data.acyivityId) {
       this.setData({
         promotion: data
       })
