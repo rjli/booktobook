@@ -77,17 +77,17 @@ Page({
   }),
   // 图书上架
   onShalveTap: util.throttle(function(event) {
-    // wx.scanCode({
-    //   scanType: "qrCode",
-    //   success: (res) => {
-        // var id = res.result;
-    var id ="4028e4996349c2bb01634e85e53700a0";
+    wx.scanCode({
+      scanType: "qrCode",
+      success: (res) => {
+        var id = res.result;
+    // var id ="4028e4996349c2bb01634e85e53700a0";
         wx.navigateTo({
           url: '../machines/machine/machine?id=' + id + '&type=all&caseType=shalve',
         })
-      // },
-    //   fail: (res) => {}
-    // })
+      },
+      fail: (res) => {}
+    })
   }),
   //跳转到还书审核页面
   onReturnTap: util.throttle(function(event) {
@@ -104,5 +104,10 @@ Page({
     wx.navigateTo({
       url: '../problem/problem?problemType=want',
     })
+  }),
+  moveToUserGuide: util.throttle(function (event) {
+     wx.navigateTo({
+       url: '../user-guide/user-guide',
+     })
   })
 })

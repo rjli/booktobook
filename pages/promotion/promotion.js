@@ -17,6 +17,19 @@ Page({
       promotion: promotion,
     })
     this.countTotal();
+    wx.showShareMenu({
+      withShareTicket: true,
+      success: function (res) {
+        // 分享成功
+        console.log('shareMenu share success')
+        console.log('分享' + res)
+      },
+      fail: function (res) {
+        // 分享失败
+        console.log(res)
+      }
+    })
+
   },
   // 计算红包金额
   countTotal: function() {
@@ -81,6 +94,7 @@ Page({
       path: '/pages/index/index',
       imageUrl: this.data.coverUrl,
       success: function(res) {
+        console.log(res);
         // 转发成功
         if (that.data.promotion.message.indexOf("已参加") > -1) {
           wx.showModal({

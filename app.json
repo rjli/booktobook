@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/user-guide/user-guide",
     "pages/booklists/booklist-share/booklist-share",
     "pages/mine/mine",
     "pages/member/member",

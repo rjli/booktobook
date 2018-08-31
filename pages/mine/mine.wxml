@@ -53,7 +53,7 @@
     <text>关于娇书坊坊</text>
     <icon class="fa fa-angle-right mine-icon"></icon>
   </view>
-  <view class="tapbar">
+  <view class="tapbar" catchtap='moveToUserGuide'>
     <text>使用说明</text>
     <icon class="fa fa-angle-right mine-icon"></icon>
   </view>

@@ -143,14 +143,15 @@ Component({
         height = 0,
         borderRadius = 0
       } = params
-      // if (borderRadius) {
-      //   this.ctx.beginPath()
-      //   this.ctx.arc(left + borderRadius, top + borderRadius, borderRadius, 0, 2 * Math.PI)
-      //   this.ctx.clip()
-      //   this.ctx.drawImage(url, left, top, width, height)
-      // } else {
-      this.ctx.drawImage(url, left, top, width, height)
-      // }
+      if (borderRadius) {
+        this.ctx.beginPath()
+        this.ctx.arc(left + borderRadius, top + borderRadius, borderRadius, 0, 2 * Math.PI)
+        // 从画布上剪出这个图形
+        this.ctx.clip()
+        this.ctx.drawImage(url, left, top, borderRadius * 2, borderRadius * 2)
+      } else {
+        this.ctx.drawImage(url, left, top, width, height)
+      }
       this.ctx.restore()
     },
     drawText(params) {
