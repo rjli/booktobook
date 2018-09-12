@@ -21,7 +21,7 @@ page {
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
-  padding: 20rpx 20rpx ;
+  padding: 20rpx 20rpx;
 }
 
 .btn-common {
@@ -79,4 +79,31 @@ rich-text {
 
 .green {
   color: green;
+}
+
+.u-arrow {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+}
+
+.m-b-20{
+  margin-bottom:20rpx;
+}
+.u-arrow-up {
+  transform: rotate(-45deg);
+}
+
+.u-arrow-down {
+  transform: rotate(135deg);
+}
+
+.u-arrow-left {
+  transform: rotate(-135deg);
+}
+
+.u-arrow-right {
+  transform: rotate(45deg);
 }

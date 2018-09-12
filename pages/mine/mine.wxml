@@ -13,8 +13,8 @@
       <block wx:if="{{userInfo.memberid == ''}}">
         <text class="not_member" catchtap='moveToRegisterMember'>您还未成为会员</text>
       </block>
-      <block  wx:if="{{userInfo.memberid}}">
-      <text class="not_member" catchtap="onInfoTap" >完善个人信息</text>
+      <block wx:if="{{userInfo.memberid}}">
+        <text class="not_member" catchtap="onInfoTap">完善个人信息</text>
       </block>
     </view>
   </view>
@@ -31,7 +31,7 @@
       <text>历史借阅</text>
       <icon class="fa fa-angle-right"></icon>
     </view>
-     <view class="tapbar" bindtap="onWantTap">
+    <view class="tapbar" bindtap="onWantTap">
       <text>问题反馈</text>
       <icon class="fa fa-angle-right"></icon>
     </view>
@@ -49,12 +49,17 @@
       <icon class="fa fa-angle-right"></icon>
     </view>
   </block>
-  <view class="tapbar" bindtap="movetoAbout">
-    <text>关于娇书坊坊</text>
+
+  <view class="tapbar" catchtap='moveToComnPro'>
+    <text>常见问题</text>
     <icon class="fa fa-angle-right mine-icon"></icon>
   </view>
   <view class="tapbar" catchtap='moveToUserGuide'>
     <text>使用说明</text>
+    <icon class="fa fa-angle-right mine-icon"></icon>
+  </view>
+  <view class="tapbar" bindtap="movetoAbout">
+    <text>关于娇书坊坊</text>
     <icon class="fa fa-angle-right mine-icon"></icon>
   </view>
 </view>

@@ -1,0 +1,29 @@
+<!--pages/comn-problem/comn-problem.wxml-->
+<view>
+  <view class="page">
+    <!--分类 -->
+    <block wx:for="{{list}}" wx:for-item="problem" wx:for-index="index">
+      <view class="li" data-index="{{index}}" bindtap='changeToggle'>
+        <view class="left">
+          <text>{{problem.title}}</text>
+        </view>
+        <view class="right">
+          <text class="u-arrow {{problem.selectedFlag?'u-arrow-up':'u-arrow-down'}}"> </text>
+        </view>
+      </view>
+      <view hidden="{{!problem.selectedFlag}}">
+        <view class="detail m-b-20">
+          <text>{{problem.detail}}</text>
+        </view>
+      </view>
+    </block>
+
+
+  </view>
+  <view class="contact">
+    <!-- <button open-type="contact" session-from="weapp">联系客服
+    </button> -->
+    <contact-button  size="20" session-from="weapp">联系客服
+    </contact-button>
+  </view>
+</view>

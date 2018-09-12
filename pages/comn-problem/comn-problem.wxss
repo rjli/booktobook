@@ -1,0 +1,50 @@
+.contact {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 20rpx;
+  text-align: center;
+  background-color: white;
+}
+
+.contact contact-button {
+  /* color: grey !important; */
+}
+
+/* 列表详情 */
+
+.li {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  font-size: 34rpx;
+  width: 92%;
+  padding: 0 4%;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+.left text{
+  font-size: 28rpx;
+}
+.detail {
+  background-color: #fff;
+  padding: 0 4%;
+}
+
+.detail text{
+  color: grey;
+}
+
+.bg-gray {
+  background-color: #ccc !important;
+  border-bottom: 1rpx solid #fff !important;
+}
+
+.li .icon-xiala, .icon-shangjiantou {
+  color: #999;
+  font-size: 28rpx;
+}

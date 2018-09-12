@@ -7,6 +7,7 @@
     "pages/member/member",
     "pages/promotion/promotion",
     "pages/problem/problem",
+    "pages/comn-problem/comn-problem",
     "pages/reviews/reviews",
     "pages/mine/info/info",
     "pages/borrow/borrow",

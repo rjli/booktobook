@@ -40,7 +40,7 @@ function http(url, data, type, callBack, isNavBarLoading) {
     success: function (res) {
       // console.log("url:" + url)
       // console.log("data:" + JSON.stringify(data));
-      // console.log("res:"+JSON.stringify(res.data.result));
+      console.log("res:"+JSON.stringify(res.data.result));
       if (isNavBarLoading) {
         wx.hideNavigationBarLoading();
       } else {

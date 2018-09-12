@@ -109,5 +109,10 @@ Page({
      wx.navigateTo({
        url: '../user-guide/user-guide',
      })
+  }),
+  moveToComnPro: util.throttle(function (event) {
+    wx.navigateTo({
+      url: '../comn-problem/comn-problem',
+    })
   })
 })
